@@ -3,6 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneHandler : MonoBehaviour
 {
+    [SerializeField] GameObject NextLevel = null;
+
     private void Start()
     {
         Time.timeScale = 1; // Due to the UI Handler freezing timescale
@@ -26,5 +28,13 @@ public class SceneHandler : MonoBehaviour
     public void ReloadScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void LoadNextScene()
+    {
+        if (NextLevel != null)
+        {
+            SceneManager.LoadScene(NextLevel.name);
+        }
     }
 }
