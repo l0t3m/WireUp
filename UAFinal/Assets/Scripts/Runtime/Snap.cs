@@ -8,6 +8,7 @@ public class Snap : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log(collision.gameObject.tag);
         if (collision.gameObject.tag == "BlockPiece" && !isOccupied)
             OnSnap?.Invoke(this, collision.gameObject.GetComponent<DragAndDrop>());   
     }

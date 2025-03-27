@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class GameHandler : MonoBehaviour
 {
-    [SerializeField] List<DragAndDrop> Blocks;
-    [SerializeField] List<Snap> Grid;
+    [SerializeField] DragAndDrop[] Blocks;
+    [SerializeField] Snap[] Grid;
     private List<SnapCorrelation> relations;
+
+    [SerializeField] LevelScriptableObject levelData;
 
     private void Start()
     {
@@ -19,11 +21,13 @@ public class GameHandler : MonoBehaviour
         foreach (var obj in Blocks)
         {
             obj.OnUnsnap += HandleUnsnap;
+            obj.MaxOfType = levelData.ItemLimits[(int)obj.BlockType];
         }
     }
 
     private void HandleSnap(Snap grid, DragAndDrop block)
     {
+        if (relations.Find(relation => relation.IsPartOfCorrelation(grid, block)) != null) return;
         SnapCorrelation currentSnap = new SnapCorrelation(grid, block);
         relations.Add(currentSnap);
         currentSnap.ExecuteSnap();

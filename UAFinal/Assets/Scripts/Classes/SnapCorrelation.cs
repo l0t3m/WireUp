@@ -17,12 +17,17 @@ public class SnapCorrelation
 
     public void ExecuteUnsnap()
     {
-        grid.DoUnsnap();
-        block.DoUnsnap();
+        //grid.DoUnsnap();
+        //block.DoUnsnap();
     }
 
     public bool IsPartOfCorrelation(object obj)
     {
         return obj.Equals(block) || obj.Equals(grid);
+    }
+
+    public bool IsPartOfCorrelation(Snap grid, DragAndDrop block)
+    {
+        return grid.Equals(this.grid) || block.Equals(this.block);
     }
 }
