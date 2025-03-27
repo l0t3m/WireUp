@@ -1,7 +1,4 @@
-using UnityEngine;
-
-[CreateAssetMenu(fileName = "SnapCorrelation", menuName = "Scriptable Objects/SnapCorrelation")]
-public class SnapCorrelation : ScriptableObject
+public class SnapCorrelation
 {
     public Snap grid;
     public DragAndDrop block;
@@ -20,16 +17,12 @@ public class SnapCorrelation : ScriptableObject
 
     public void ExecuteUnsnap()
     {
-        grid.DoUnsnap(block);
+        grid.DoUnsnap();
         block.DoUnsnap();
     }
 
-    public override bool Equals(object other)
+    public bool IsPartOfCorrelation(object obj)
     {
-        if (other is Snap grid)
-            return this.grid.Equals(grid);
-        else if (other is DragAndDrop block)
-            return this.block.Equals(block);
-        else return base.Equals(other);
+        return obj.Equals(block) || obj.Equals(grid);
     }
 }

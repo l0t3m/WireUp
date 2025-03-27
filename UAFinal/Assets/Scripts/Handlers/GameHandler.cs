@@ -34,7 +34,7 @@ public class GameHandler : MonoBehaviour
         SnapCorrelation currentCurrelation = null;
         foreach (var Correlation in relations)
         {
-            if (Correlation.Equals(block))
+            if (Correlation.IsPartOfCorrelation(block))
             {
                 currentCurrelation = Correlation;
                 break;

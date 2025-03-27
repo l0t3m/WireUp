@@ -681,7 +681,7 @@ GameObject:
   - component: {fileID: 441738712}
   m_Layer: 0
   m_Name: GridCube
-  m_TagString: Untagged
+  m_TagString: GridItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

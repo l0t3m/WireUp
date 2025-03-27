@@ -6,6 +6,7 @@ TagManager:
   tags:
   - BlockPiece
   - Ground
+  - GridItem
   layers:
   - Default
   - TransparentFX

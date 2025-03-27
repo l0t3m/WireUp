@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Collider))]
 
@@ -23,6 +24,10 @@ public class DragAndDrop : MonoBehaviour
     {
         offset = transform.position - GetMouseWorldPosition();
         isDragging = true;
+        if (isSnapped)
+        {
+            OnUnsnap?.Invoke(this);
+        }
     }
 
     private void OnMouseDrag()
@@ -36,8 +41,22 @@ public class DragAndDrop : MonoBehaviour
 
     private void OnMouseUp()
     {
-        OnUnsnap?.Invoke(this);
         isDragging = false;
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out RaycastHit hit, 10))
+        {
+            if (hit.transform.gameObject.tag != "GridItem")
+            {
+                OnUnsnap?.Invoke(this);
+                isDragging = false;
+                ResetPosition();
+            }
+        }
+        else
+        {
+            OnUnsnap?.Invoke(this);
+            isDragging = false;
+            ResetPosition();
+        }
     }
 
     public void ResetPosition()
@@ -47,7 +66,7 @@ public class DragAndDrop : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Ground")
+        if (collision.gameObject.tag == "Ground" || (collision.gameObject.tag == "BlockPiece") && !isSnapped)
             ResetPosition();
     }
 

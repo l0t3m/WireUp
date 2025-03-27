@@ -75,3 +75,5 @@ crashlytics-build.properties
 /UAFinal/Library
 /UAFinal/Logs
 /UAFinal/Temp
+UAFinal/ProjectSettings/EditorBuildSettings.asset
+UAFinal/UserSettings/Layouts/default-6000.dwlt
