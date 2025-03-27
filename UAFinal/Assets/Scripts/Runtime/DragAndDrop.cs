@@ -46,16 +46,12 @@ public class DragAndDrop : MonoBehaviour
         {
             if (hit.transform.gameObject.tag != "GridItem")
             {
-                OnUnsnap?.Invoke(this);
-                isDragging = false;
-                ResetPosition();
+                ResetBlock();
             }
         }
         else
         {
-            OnUnsnap?.Invoke(this);
-            isDragging = false;
-            ResetPosition();
+            ResetBlock();
         }
     }
 
@@ -78,6 +74,13 @@ public class DragAndDrop : MonoBehaviour
     public void DoUnsnap()
     {
         isSnapped = false;
+    }
+
+    private void ResetBlock()
+    {
+        OnUnsnap?.Invoke(this);
+        isDragging = false;
+        ResetPosition();
     }
 
     // Methods:
