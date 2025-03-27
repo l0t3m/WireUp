@@ -24,6 +24,7 @@ public class DragAndDrop : MonoBehaviour
     private bool isDragging = false;
     private bool isSnapped = false;
     private const int dragYLevel = 3;
+    private float dragZ;
 
     public int MaxOfType = 0;
 
@@ -38,7 +39,8 @@ public class DragAndDrop : MonoBehaviour
     {
         if (!isSnapped)
         {
-            offset = transform.position - GetMouseWorldPosition();
+            //Vector3 mouseWorld = GetMouseWorldPosition();
+            //offset = transform.position - mouseWorld;
             isDragging = true;
         }
         //if (isSnapped)
@@ -49,14 +51,22 @@ public class DragAndDrop : MonoBehaviour
     {
         if (isDragging)
         {
-            transform.position = GetMouseWorldPosition() + offset;
-            transform.position = new Vector3(transform.position.x, dragYLevel, transform.position.z);
+            Vector3 mouseWorld = GetMouseWorldPosition();
+            Vector3 targetPosition = mouseWorld;// + offset;
+            transform.position = new Vector3(targetPosition.x, dragYLevel, targetPosition.z);
         }
     }
 
     private void OnMouseUp()
     {
         isDragging = false;
+
+        if (TryGetComponent<Rigidbody>(out var rb))
+        {
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+
         if (isSnapped) return;
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out RaycastHit hit, 10))
         {
@@ -83,11 +93,24 @@ public class DragAndDrop : MonoBehaviour
     }
 
     // Methods:
+    //private Vector3 GetMouseWorldPosition()
+    //{
+    //    Vector3 screenMousePosition = Input.mousePosition;
+    //    screenMousePosition.z = dragZ;
+    //    return currentCamera.ScreenToWorldPoint(screenMousePosition);
+    //}
+
     private Vector3 GetMouseWorldPosition()
     {
-        Vector3 screenMousePosition = Input.mousePosition;
-        screenMousePosition.z = currentCamera.WorldToScreenPoint(transform.position).z;
-        return currentCamera.ScreenToWorldPoint(screenMousePosition);
+        Ray ray = currentCamera.ScreenPointToRay(Input.mousePosition);
+        Plane dragPlane = new Plane(Vector3.up, new Vector3(0, dragYLevel, 0)); // horizontal plane at dragYLevel
+
+        if (dragPlane.Raycast(ray, out float enter))
+        {
+            return ray.GetPoint(enter); // where the ray hits the plane
+        }
+
+        return transform.position; // fallback
     }
 
     public void ResetPosition()
