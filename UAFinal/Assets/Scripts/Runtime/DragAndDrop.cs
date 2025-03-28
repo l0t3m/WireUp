@@ -1,33 +1,26 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
-
-public enum BlockSection
-{
-    StraightSection,
-    LeftCornerSection,
-    TSection,
-    RightCornerSection,
-}
 
 [RequireComponent(typeof(Collider))]
 public class DragAndDrop : MonoBehaviour
 {
     public event Action<DragAndDrop> OnUnsnap;
 
-    [SerializeField] Camera currentCamera;
-    [SerializeField] public BlockSection BlockType;
+    public Camera currentCamera;
     private Vector3 originalPosition;
     private Quaternion originalRotation;
 
     private bool isDragging = false;
     private bool isSnapped = false;
     private const int dragYLevel = 3;
-    private float dragZ;
 
-    public int MaxOfType = 0;
+    [HideInInspector] public int MaxOfType = 0;
 
+    [SerializeField] bool canRotate = true;
     private bool isRotated = false;
+
 
 
     private void Start()
@@ -73,7 +66,7 @@ public class DragAndDrop : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if (Input.GetMouseButtonDown(1) && isSnapped)
+        if (Input.GetMouseButtonDown(1) && isSnapped && canRotate)
         {
             transform.Rotate(new Vector3(0, isRotated ? -20 : 20, 0));
             isRotated = !isRotated;

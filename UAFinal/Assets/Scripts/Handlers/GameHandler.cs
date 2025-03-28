@@ -1,34 +1,48 @@
 using NUnit.Framework;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static LevelScriptableObject;
 
 public class GameHandler : MonoBehaviour
 {
     [SerializeField] DragAndDrop[] Blocks;
-    [SerializeField] Snap[] Grid;
     private List<SnapCorrelation> relations;
 
+    [SerializeField] BlockData blockData;
     [SerializeField] LevelScriptableObject levelData;
     [SerializeField] InGameUIHandler gameUIHandler;
+
+    [SerializeField] private Vector3 topLeftCorner;
+    [SerializeField] private float blockDistance = 10f;
+
+    [SerializeField] Camera mainCamera;
 
     private void Start()
     {
         // UI Related:
-        gameUIHandler.TitleText.text = levelData.LevelNumber.ToString();
-        gameUIHandler.timer.StartValue = levelData.timerLength;
+        //gameUIHandler.TitleText.text = levelData.LevelNumber.ToString();
+        //gameUIHandler.timer.StartValue = levelData.timerLength;
 
         // Correlations Related:
         relations = new List<SnapCorrelation>();
-        foreach (var obj in Grid )
-        {
-            obj.OnSnap += HandleSnap;
-        }
+        BuildMap();
+    }
 
-        foreach (var obj in Blocks)
+    private void BuildMap()
+    {
+        rowData[] mapPrimitive = levelData.LevelsMap;      
+        for (int i = 0; i < mapPrimitive.Length; i++)
         {
-            obj.OnUnsnap += HandleUnsnap;
-            obj.MaxOfType = levelData.ItemLimits[(int)obj.BlockType];
+            for (int j = 0; j < mapPrimitive[0].types.Length; j++)
+            {
+                BlockSection currentSection = mapPrimitive[i].types[j];
+                Vector3 newPos = new Vector3(topLeftCorner.x + j * blockDistance, topLeftCorner.y, topLeftCorner.z - i * blockDistance);
+                Snap currentGrid = Instantiate(blockData.GetGridObject(), newPos, new Quaternion()).GameObject().GetComponent<Snap>();
+                currentGrid.OnSnap += HandleSnap;
+                if (currentSection != BlockSection.Empty) Instantiate(blockData.GetBlockByType(currentSection), newPos, new Quaternion()).GameObject().GetComponent<DragAndDrop>().currentCamera = mainCamera;
+            }
         }
     }
 

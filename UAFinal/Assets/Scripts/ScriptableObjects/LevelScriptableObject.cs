@@ -8,9 +8,9 @@ using UnityEngine;
 public class LevelScriptableObject : ScriptableObject
 {
     [Serializable]
-    public struct rowData
+    public class rowData
     {
-        public GridType[] types;
+        public BlockSection[] types = new BlockSection[4];        
     }
 
     [SerializeField] public rowData[] LevelsMap = new rowData[4];
