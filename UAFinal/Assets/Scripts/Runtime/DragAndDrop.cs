@@ -7,7 +7,7 @@ public enum BlockSection
     StraightSection,
     LeftCornerSection,
     TSection,
-    RightCornerSection
+    RightCornerSection,
 }
 
 [RequireComponent(typeof(Collider))]
@@ -17,7 +17,6 @@ public class DragAndDrop : MonoBehaviour
 
     [SerializeField] Camera currentCamera;
     [SerializeField] public BlockSection BlockType;
-    private Vector3 offset;
     private Vector3 originalPosition;
     private Quaternion originalRotation;
 
@@ -38,13 +37,8 @@ public class DragAndDrop : MonoBehaviour
     private void OnMouseDown()
     {
         if (!isSnapped)
-        {
-            //Vector3 mouseWorld = GetMouseWorldPosition();
-            //offset = transform.position - mouseWorld;
             isDragging = true;
-        }
-        //if (isSnapped)
-            //OnUnsnap?.Invoke(this);
+
     }
 
     private void OnMouseDrag()
@@ -52,7 +46,7 @@ public class DragAndDrop : MonoBehaviour
         if (isDragging)
         {
             Vector3 mouseWorld = GetMouseWorldPosition();
-            Vector3 targetPosition = mouseWorld;// + offset;
+            Vector3 targetPosition = mouseWorld;
             transform.position = new Vector3(targetPosition.x, dragYLevel, targetPosition.z);
         }
     }
@@ -93,24 +87,17 @@ public class DragAndDrop : MonoBehaviour
     }
 
     // Methods:
-    //private Vector3 GetMouseWorldPosition()
-    //{
-    //    Vector3 screenMousePosition = Input.mousePosition;
-    //    screenMousePosition.z = dragZ;
-    //    return currentCamera.ScreenToWorldPoint(screenMousePosition);
-    //}
-
     private Vector3 GetMouseWorldPosition()
     {
         Ray ray = currentCamera.ScreenPointToRay(Input.mousePosition);
-        Plane dragPlane = new Plane(Vector3.up, new Vector3(0, dragYLevel, 0)); // horizontal plane at dragYLevel
+        Plane dragPlane = new Plane(Vector3.up, new Vector3(0, dragYLevel, 0)); 
 
         if (dragPlane.Raycast(ray, out float enter))
         {
-            return ray.GetPoint(enter); // where the ray hits the plane
+            return ray.GetPoint(enter);
         }
 
-        return transform.position; // fallback
+        return transform.position;
     }
 
     public void ResetPosition()

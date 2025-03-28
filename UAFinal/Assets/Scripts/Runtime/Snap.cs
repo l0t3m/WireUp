@@ -1,26 +1,41 @@
 using System;
 using UnityEngine;
 
+public enum GridType
+{
+    Empty,
+    Occupied,
+    Start,
+    End
+}
+
 public class Snap : MonoBehaviour
 {
     public event Action<Snap, DragAndDrop> OnSnap;
+    private GridType gridType;
     private bool isOccupied = false;
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.gameObject.tag);
-        if (collision.gameObject.tag == "BlockPiece" && !isOccupied)
+        if (CanSnapOntoMe(collision.gameObject.tag))
             OnSnap?.Invoke(this, collision.gameObject.GetComponent<DragAndDrop>());   
-    }
+    }  
 
-    public void DoSnap(DragAndDrop block)
+    public void DoSnap(GameObject obj)
     {
-        block.transform.position = transform.position;
+        obj.transform.position = transform.position;
+        gridType = GridType.Occupied;
         isOccupied = true;
     }
 
     public void DoUnsnap()
-    {       
+    {
+        gridType = GridType.Empty;
         isOccupied = false;
+    }
+
+    private bool CanSnapOntoMe(string tag)
+    {
+        return tag == "BlockPiece" && !isOccupied && gridType != GridType.End && gridType != GridType.Start;
     }
 }
