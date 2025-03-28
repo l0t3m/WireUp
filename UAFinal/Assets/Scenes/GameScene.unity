@@ -700,6 +700,7 @@ MonoBehaviour:
   WinPanel: {fileID: 956040315}
   LosePanel: {fileID: 1797215443}
   timer: {fileID: 796426612}
+  TitleText: {fileID: 960366889}
 --- !u!224 &512997035 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 550097983602023366, guid: 1d78d5770b6264945b266a7d43be58e4, type: 3}
@@ -737,6 +738,7 @@ Transform:
   - {fileID: 1807783598}
   - {fileID: 1446473910}
   - {fileID: 502398592}
+  - {fileID: 1297740119}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &624614440
@@ -1574,6 +1576,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1162096033}
   m_CullTransparentMesh: 1
+--- !u!1 &1297740118
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1297740119}
+  - component: {fileID: 1297740120}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1297740119
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1297740118}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 573069947}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1297740120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1297740118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1b28d5ef5767a64da48772c64729349, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Blocks: []
+  Grid: []
+  levelData: {fileID: 11400000, guid: 9668c1e70c3fd724188c57d68d37f8fd, type: 2}
+  gameUIHandler: {fileID: 502398594}
 --- !u!1 &1337142921
 GameObject:
   m_ObjectHideFlags: 0

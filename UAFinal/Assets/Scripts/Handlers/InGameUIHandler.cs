@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -5,7 +6,8 @@ public class InGameUIHandler : MonoBehaviour
 {
     [SerializeField] GameObject WinPanel;
     [SerializeField] GameObject LosePanel;
-    [SerializeField] Timer timer;
+    [SerializeField] public Timer timer;
+    [SerializeField] public TextMeshProUGUI TitleText;
 
     private void Start()
     {

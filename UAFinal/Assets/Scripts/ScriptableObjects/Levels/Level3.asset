@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: abb9f0101ef98674f8147c41738d229e, type: 3}
-  m_Name: Level2
+  m_Name: Level3
   m_EditorClassIdentifier: 
   LevelsMap:
   - types: 
@@ -18,5 +18,5 @@ MonoBehaviour:
   - types: 
   - types: 
   ItemLimits: 
-  LevelNumber: 2
+  LevelNumber: 3
   timerLength: -1

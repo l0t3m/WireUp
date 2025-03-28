@@ -6,7 +6,7 @@ public class Timer : MonoBehaviour
 {
     public event Action onTimerEnd;
 
-    [SerializeField] float StartValue = 60f;
+    public float StartValue = 60f;
     private float timer;
     private bool isFinished = false;
 
@@ -19,7 +19,7 @@ public class Timer : MonoBehaviour
     {
         if (timer == -1)
         {
-            this.GetComponent<TextMeshProUGUI>().text = "Unlimited";
+            this.GetComponent<TextMeshProUGUI>().text = "--.--";
         }
         else if (timer > 0f)
         {

@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class GameHandler : MonoBehaviour
 {
@@ -9,9 +10,15 @@ public class GameHandler : MonoBehaviour
     private List<SnapCorrelation> relations;
 
     [SerializeField] LevelScriptableObject levelData;
+    [SerializeField] InGameUIHandler gameUIHandler;
 
     private void Start()
     {
+        // UI Related:
+        gameUIHandler.TitleText.text = levelData.LevelNumber.ToString();
+        gameUIHandler.timer.StartValue = levelData.timerLength;
+
+        // Correlations Related:
         relations = new List<SnapCorrelation>();
         foreach (var obj in Grid )
         {

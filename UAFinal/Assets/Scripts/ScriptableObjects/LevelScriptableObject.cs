@@ -12,8 +12,9 @@ public class LevelScriptableObject : ScriptableObject
     {
         public GridType[] types;
     }
+
     [SerializeField] public rowData[] LevelsMap = new rowData[4];
     [SerializeField] public int[] ItemLimits;
-    [SerializeField] public int LevelNumber;
-    [SerializeField] public float timerLength;
+    [SerializeField] public int LevelNumber = 0;
+    [SerializeField] public float timerLength = -1;
 }
