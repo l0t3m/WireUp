@@ -23,8 +23,8 @@ public class Timer : MonoBehaviour
         }
         else if (timer > 0f)
         {
-            timer -= Time.deltaTime;
             this.GetComponent<TextMeshProUGUI>().text = timer.ToString("00.00");
+            timer -= Time.deltaTime;
         }
         else
         {
