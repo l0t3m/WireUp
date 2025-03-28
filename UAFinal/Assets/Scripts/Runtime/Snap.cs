@@ -16,7 +16,9 @@ public class Snap : MonoBehaviour
 
     public void DoSnap(GameObject obj)
     {
-        obj.transform.position = transform.position;
+        Vector3 newPos = transform.position;
+        newPos.y += 0.5f;
+        obj.transform.position = newPos;
         isOccupied = true;
     }
 

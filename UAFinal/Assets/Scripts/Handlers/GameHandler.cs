@@ -41,7 +41,11 @@ public class GameHandler : MonoBehaviour
                 Vector3 newPos = new Vector3(topLeftCorner.x + j * blockDistance, topLeftCorner.y, topLeftCorner.z - i * blockDistance);
                 Snap currentGrid = Instantiate(blockData.GetGridObject(), newPos, new Quaternion()).GameObject().GetComponent<Snap>();
                 currentGrid.OnSnap += HandleSnap;
-                if (currentSection != BlockSection.Empty) Instantiate(blockData.GetBlockByType(currentSection), newPos, new Quaternion()).GameObject().GetComponent<DragAndDrop>().currentCamera = mainCamera;
+                if (currentSection != BlockSection.Empty)
+                {
+                    newPos.y += 0.5f;
+                    Instantiate(blockData.GetBlockByType(currentSection), newPos, new Quaternion()).GameObject().GetComponent<DragAndDrop>().currentCamera = mainCamera;
+                }
             }
         }
     }

@@ -14,7 +14,7 @@ public class DragAndDrop : MonoBehaviour
 
     private bool isDragging = false;
     private bool isSnapped = false;
-    private const int dragYLevel = 3;
+    private const float dragYLevel = 2.5f;
 
     [HideInInspector] public int MaxOfType = 0;
 
@@ -26,6 +26,7 @@ public class DragAndDrop : MonoBehaviour
     private void Start()
     {
         originalPosition = transform.position;
+        currentCamera = Camera.main;
     }
     private void OnMouseDown()
     {
@@ -68,7 +69,7 @@ public class DragAndDrop : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1) && isSnapped && canRotate)
         {
-            transform.Rotate(new Vector3(0, isRotated ? -20 : 20, 0));
+            transform.Rotate(new Vector3(0, isRotated ? -90 : 90, 0));
             isRotated = !isRotated;
         }
     }
