@@ -11,7 +11,7 @@ public class SnapCorrelation
 
     public void ExecuteSnap()
     {
-        grid.DoSnap(block);
+        grid.DoSnap(block.gameObject);
         block.DoSnap();
     }
 
