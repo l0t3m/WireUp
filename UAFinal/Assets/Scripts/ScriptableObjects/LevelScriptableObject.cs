@@ -17,9 +17,9 @@ public class LevelScriptableObject : ScriptableObject
     [SerializeField] private int[] ItemLimits;
     [SerializeField] public int LevelNumber = 0;
     [SerializeField] public float TimerLength = -1;
-    [SerializeField] public Vector3 TopBlockPosition;
-    [SerializeField] public Vector3 TopLeftCorner;
-    [SerializeField] public float BlockDistance = 10f;
+    [SerializeField] public Vector3 TopBlockPosition = new Vector3(5, 0.05f, 2);
+    [SerializeField] public Vector3 TopLeftCorner = new Vector3(-10, 0.4f, 2);
+    [SerializeField] public float BlockDistance = 2.5f;
 
     public int GetItemLimit(BlockSection section)
     {

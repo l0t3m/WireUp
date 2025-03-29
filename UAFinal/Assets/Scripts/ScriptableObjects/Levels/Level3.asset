@@ -13,10 +13,13 @@ MonoBehaviour:
   m_Name: Level3
   m_EditorClassIdentifier: 
   LevelsMap:
-  - types: 
-  - types: 
-  - types: 
-  - types: 
-  ItemLimits: 
+  - types: 06000000000000000500000000000000
+  - types: 00000000010000000000000001000000
+  - types: 05000000000000000000000000000000
+  - types: 00000000000000000100000007000000
+  ItemLimits: 0a0000000a0000000a0000000a000000
   LevelNumber: 3
-  timerLength: -1
+  TimerLength: -1
+  TopBlockPosition: {x: 5, y: 0.05, z: 2}
+  TopLeftCorner: {x: -10, y: 0.4, z: 2}
+  BlockDistance: 2.5
