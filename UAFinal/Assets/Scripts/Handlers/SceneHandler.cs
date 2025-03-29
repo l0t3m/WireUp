@@ -3,11 +3,27 @@ using UnityEngine.SceneManagement;
 
 public class SceneHandler : MonoBehaviour
 {
-    [SerializeField] GameObject NextLevel = null;
+    public static SceneHandler Instance;
+    [SerializeField] LevelScriptableObject[] Levels;
+    public LevelScriptableObject CurrentLevel;
 
-    private void Start()
+    void Awake()
     {
-        Time.timeScale = 1; // Due to the UI Handler freezing timescale
+        this.InstantiateController();
+        Time.timeScale = 1f;
+    }
+
+    private void InstantiateController()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(this);
+        }
+        else if (this != Instance)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     public void LoadMainMenu()
@@ -17,7 +33,8 @@ public class SceneHandler : MonoBehaviour
 
     public void LoadGameScene()
     {
-        SceneManager.LoadScene(0);
+        CurrentLevel = Levels[0];
+        SceneManager.LoadScene(1);
     }
 
     public void QuitGame()
@@ -32,9 +49,6 @@ public class SceneHandler : MonoBehaviour
 
     public void LoadNextScene()
     {
-        if (NextLevel != null)
-        {
-            SceneManager.LoadScene(NextLevel.name);
-        }
+        
     }
 }
