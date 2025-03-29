@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: abb9f0101ef98674f8147c41738d229e, type: 3}
-  m_Name: Level2
+  m_Name: Level7
   m_EditorClassIdentifier: 
   LevelsMap:
-  - types: 06000000000000000000000000000000
-  - types: 00000000010000000100000007000000
-  - types: 00000000000000000000000000000000
-  - types: 00000000000000000000000000000000
-  ItemLimits: 0a0000000a0000000a0000000a000000
-  LevelNumber: 2
-  TimerLength: -1
+  - types: 03000000060000000500000007000000
+  - types: 00000000020000000500000000000000
+  - types: 05000000000000000000000001000000
+  - types: 00000000000000000100000000000000
+  ItemLimits: 01000000000000000200000002000000
+  LevelNumber: 7
+  TimerLength: 120
   TopBlockPosition: {x: 5, y: 0.05, z: 2}
   TopLeftCorner: {x: -10, y: 0.4, z: 2}
   BlockDistance: 2.5
