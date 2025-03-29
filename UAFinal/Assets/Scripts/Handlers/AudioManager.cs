@@ -21,8 +21,12 @@ public class AudioManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        settingsHandler.OnSFXChange += ChangeSFX;
-        settingsHandler.OnMusicChange += ChangeMusic;
+        if (settingsHandler != null)
+        {
+            settingsHandler.OnSFXChange += ChangeSFX;
+            settingsHandler.OnMusicChange += ChangeMusic;
+        }
+
         ChangeSFX(PlayerPrefs.GetFloat("SFXVolume", 5));
         ChangeMusic(PlayerPrefs.GetFloat("MusicVolume", 5));
     }
