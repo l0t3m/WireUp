@@ -8,8 +8,8 @@ public class DragAndDrop : MonoBehaviour
 {
     public event Action<DragAndDrop> OnUnsnap;
 
-    public Camera currentCamera;
-    public Vector3 OriginalPosition;
+    [HideInInspector] public Camera currentCamera;
+    [HideInInspector] public Vector3 OriginalPosition;
 
     private bool isDragging = false;
     private bool isSnapped = false;

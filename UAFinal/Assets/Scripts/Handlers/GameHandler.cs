@@ -4,11 +4,9 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static LevelScriptableObject;
-using static Unity.Collections.AllocatorManager;
 
 public class GameHandler : MonoBehaviour
 {
-    [SerializeField] DragAndDrop[] Blocks;
     private List<SnapCorrelation> relations;
 
     [SerializeField] BlockData blockData;
@@ -29,6 +27,8 @@ public class GameHandler : MonoBehaviour
 
         // Correlations Related:
         relations = new List<SnapCorrelation>();
+
+
         BuildMap();
 
         // spawn default blocks
