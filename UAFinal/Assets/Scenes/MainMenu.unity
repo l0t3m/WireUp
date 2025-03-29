@@ -1738,6 +1738,58 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1271292745}
   m_CullTransparentMesh: 1
+--- !u!1 &1319281800
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1319281801}
+  - component: {fileID: 1319281802}
+  m_Layer: 0
+  m_Name: LevelHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1319281801
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1319281800}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1319281802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1319281800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92a8bdaacfddd7e45b6ba8c8a01c9b4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levels:
+  - {fileID: 11400000, guid: 9668c1e70c3fd724188c57d68d37f8fd, type: 2}
+  - {fileID: 11400000, guid: d3de3eb7c633a5845bfd0817d019d70c, type: 2}
+  - {fileID: 11400000, guid: 6b0c81931effd864e86e19ab44857dba, type: 2}
+  - {fileID: 11400000, guid: 48e40a1bf397b6a4880fa8bd93364ca3, type: 2}
+  - {fileID: 11400000, guid: 69d51952571d5454898263748c09a36e, type: 2}
+  - {fileID: 11400000, guid: e34f3d2763ecfef47aff511b298f10e1, type: 2}
+  - {fileID: 11400000, guid: e251d37fa66da434d97f2a310c6f1eae, type: 2}
 --- !u!1 &1336740355
 GameObject:
   m_ObjectHideFlags: 0
@@ -3258,6 +3310,7 @@ CanvasRenderer:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1319281801}
   - {fileID: 330585546}
   - {fileID: 410087041}
   - {fileID: 832575519}

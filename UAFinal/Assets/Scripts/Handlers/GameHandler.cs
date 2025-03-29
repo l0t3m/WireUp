@@ -10,31 +10,36 @@ public class GameHandler : MonoBehaviour
 {
     private List<SnapCorrelation> relations;
 
-    [SerializeField] BlockData blockData;
-    [SerializeField] LevelScriptableObject levelData;
+    [SerializeField] BlockData blockData;      
     [SerializeField] InGameUIHandler gameUIHandler;  
-
     [SerializeField] Camera mainCamera;
-
     [SerializeField] UnityEngine.Object powerPrefab;
+    [SerializeField] SceneHandler sceneHandler;
+    LevelScriptableObject levelData;
     private NavMeshAgent powerObject;
     private Transform endObject;
-
     private Dictionary<BlockSection, int> itemLimits = new Dictionary<BlockSection, int>();
 
-    private event Action OnGameEnded;
+    private event Action OnGameStarted;
 
     private bool isFinished = false;
+    private bool isStarted = false;
+    private float idleTime = 5;
+    [SerializeField] private const float idleTimeBase = 5;
+    private Vector3 previousPosition;
 
     private void Start()
     {
+        levelData = LevelHandler.Instance.GetLevel();
+
         // UI Related:
         gameUIHandler.TitleText.text = levelData.LevelNumber.ToString();
         gameUIHandler.timer.StartValue = levelData.TimerLength;
+        gameUIHandler.timer.onTimerEnd += Lose;
 
         // Correlations Related:
         relations = new List<SnapCorrelation>();
-
+        
         BuildMap();
 
         // spawn default blocks
@@ -45,14 +50,27 @@ public class GameHandler : MonoBehaviour
             SpawnNewBlock(section);
             gameUIHandler.UpdateBlocksLeftText(section, levelData.GetItemLimit(section));
         }
+        previousPosition = powerObject.transform.position;
     }
 
     private void Update()
     {
         if (powerObject != null)
         {
-            if (Vector3.Distance(powerObject.transform.position, endObject.position) < 1f && !isFinished)   
+            if (Vector3.Distance(powerObject.transform.position, endObject.position) < 1f && !isFinished)
                 Win();
+            else if (!isFinished && isStarted)
+            {
+                if (Vector3.Equals(previousPosition, powerObject.transform.position))
+                {
+                    idleTime -= Time.deltaTime;
+                    if (idleTime <= 0f)
+                        Lose();
+                }
+                else
+                    idleTime = idleTimeBase;
+            }
+            previousPosition = powerObject.transform.position;
         }
     }
 
@@ -126,11 +144,13 @@ public class GameHandler : MonoBehaviour
     {
         block.currentCamera = mainCamera;
         block.OriginalPosition = block.transform.position;
-        OnGameEnded += block.DisableActions;
+        OnGameStarted += block.DisableActions;
     }
 
     public void BeginAgentMovement()
     {
+        OnGameStarted?.Invoke();
+        isStarted = true;
         powerObject.isStopped = false;
     }
 
@@ -139,6 +159,18 @@ public class GameHandler : MonoBehaviour
         isFinished = true;
         powerObject.isStopped = true;
         gameUIHandler.ToggleWinPanel();
-        OnGameEnded?.Invoke();
+    }
+
+    private void Lose()
+    {
+        isFinished = true;
+        powerObject.isStopped = true;
+        gameUIHandler.ToggleLosePanel();
+    }
+
+    public void NextButtonPressed()
+    {
+        LevelHandler.Instance.LevelComplete();
+        sceneHandler.LoadNextScene();
     }
 }

@@ -1298,10 +1298,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockData: {fileID: 11400000, guid: 72b30cf10336d994d9fcedb99fdaeab0, type: 2}
-  levelData: {fileID: 11400000, guid: 9668c1e70c3fd724188c57d68d37f8fd, type: 2}
   gameUIHandler: {fileID: 502398594}
   mainCamera: {fileID: 330585545}
   powerPrefab: {fileID: 2197758990708874103, guid: e6ceb5486b2b2b645a943b07816f4f85, type: 3}
+  sceneHandler: {fileID: 420185201}
 --- !u!1 &748487850
 GameObject:
   m_ObjectHideFlags: 0
@@ -1882,14 +1882,14 @@ PrefabInstance:
     - target: {fileID: 6015231258122024187, guid: 23d7649a601785441990a1f29d3b36b3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 420185201}
+      objectReference: {fileID: 742657882}
     - target: {fileID: 6015231258122024187, guid: 23d7649a601785441990a1f29d3b36b3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadNextScene
+      value: NextButtonPressed
       objectReference: {fileID: 0}
     - target: {fileID: 6015231258122024187, guid: 23d7649a601785441990a1f29d3b36b3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: SceneHandler, Assembly-CSharp
+      value: GameHandler, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6198157561972327657, guid: 23d7649a601785441990a1f29d3b36b3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
