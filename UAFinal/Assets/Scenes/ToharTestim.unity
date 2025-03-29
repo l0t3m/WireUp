@@ -928,16 +928,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1b28d5ef5767a64da48772c64729349, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Blocks:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   blockData: {fileID: 11400000, guid: 72b30cf10336d994d9fcedb99fdaeab0, type: 2}
   levelData: {fileID: 11400000, guid: 9668c1e70c3fd724188c57d68d37f8fd, type: 2}
   gameUIHandler: {fileID: 502398594}
-  topLeftCorner: {x: -10, y: 0.4, z: 2}
-  blockDistance: 2.5
   mainCamera: {fileID: 330585545}
 --- !u!1 &748487850
 GameObject:
@@ -2113,7 +2106,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d84c7a10d4612f4c867116f60e9a1ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NextLevel: {fileID: 0}
+  Levels: []
+  CurrentLevel: {fileID: 0}
 --- !u!1 &1820128051
 GameObject:
   m_ObjectHideFlags: 0
