@@ -27,7 +27,7 @@ public class GameHandler : MonoBehaviour
     {
         // UI Related:
         gameUIHandler.TitleText.text = levelData.LevelNumber.ToString();
-        gameUIHandler.timer.StartValue = levelData.TimerLength; 
+        gameUIHandler.timer.StartValue = levelData.TimerLength;
 
         // Correlations Related:
         relations = new List<SnapCorrelation>();
@@ -41,6 +41,7 @@ public class GameHandler : MonoBehaviour
             BlockSection section = (BlockSection)(i+1);
             itemLimits.Add(section, levelData.GetItemLimit(section));
             SpawnNewBlock(section);
+            gameUIHandler.UpdateBlocksLeftText(section, levelData.GetItemLimit(section));
         }
     }
 
@@ -91,6 +92,7 @@ public class GameHandler : MonoBehaviour
     {
         if (!itemLimits.ContainsKey(block.BlockSection) || block.IsGenerated) return;
         itemLimits[block.BlockSection]--;
+        gameUIHandler.UpdateBlocksLeftText(block.BlockSection, itemLimits[block.BlockSection]);
         if (itemLimits[block.BlockSection] > 0)
             ExecuteNewPlaceableBlock(Instantiate(block, block.OriginalPosition, new Quaternion()).GameObject().GetComponent<DragAndDrop>());
 
