@@ -26,6 +26,7 @@ public class AudioManager : MonoBehaviour
             settingsHandler.OnSFXChange += ChangeSFX;
             settingsHandler.OnMusicChange += ChangeMusic;
         }
+
         ChangeSFX(PlayerPrefs.GetFloat("SFXVolume", 5));
         ChangeMusic(PlayerPrefs.GetFloat("MusicVolume", 5));
     }
