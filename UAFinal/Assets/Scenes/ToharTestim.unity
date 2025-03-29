@@ -405,7 +405,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 200868305}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 742657882}
+        m_TargetAssemblyTypeName: GameHandler, Assembly-CSharp
+        m_MethodName: BeginAgentMovement
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &200868305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -932,6 +944,7 @@ MonoBehaviour:
   levelData: {fileID: 11400000, guid: 9668c1e70c3fd724188c57d68d37f8fd, type: 2}
   gameUIHandler: {fileID: 502398594}
   mainCamera: {fileID: 330585545}
+  powerPrefab: {fileID: 2197758990708874103, guid: e6ceb5486b2b2b645a943b07816f4f85, type: 3}
 --- !u!1 &748487850
 GameObject:
   m_ObjectHideFlags: 0

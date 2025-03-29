@@ -2,6 +2,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UIElements;
 using static LevelScriptableObject;
 
@@ -14,6 +15,9 @@ public class GameHandler : MonoBehaviour
     [SerializeField] InGameUIHandler gameUIHandler;  
 
     [SerializeField] Camera mainCamera;
+
+    [SerializeField] Object powerPrefab;
+    private NavMeshAgent powerObject;
 
     private Dictionary<BlockSection, int> itemLimits = new Dictionary<BlockSection, int>();
 
@@ -57,6 +61,16 @@ public class GameHandler : MonoBehaviour
                     DragAndDrop dragndrop = Instantiate(blockData.GetBlockByType(currentSection), newPos, new Quaternion()).GameObject().GetComponent<DragAndDrop>();
                     dragndrop.IsGenerated = true;
                     ExecuteNewPlaceableBlock(dragndrop);
+                    if (currentSection == BlockSection.StartSection)
+                    {
+                        newPos.y += 0.5f;
+                        powerObject = Instantiate(powerPrefab, newPos, new Quaternion()).GameObject().GetComponent<NavMeshAgent>();
+                    }
+                    else if (currentSection == BlockSection.FinishSection)
+                    {
+                        powerObject.SetDestination(newPos);
+                        powerObject.isStopped = true;
+                    }
                 }
             }
         }
@@ -117,5 +131,10 @@ public class GameHandler : MonoBehaviour
 
         currentCurrelation.ExecuteUnsnap();
         relations.Remove(currentCurrelation);
+    }
+
+    public void BeginAgentMovement()
+    {
+        powerObject.isStopped = false;
     }
 }
