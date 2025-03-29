@@ -15,7 +15,6 @@ public class GameHandler : MonoBehaviour
     [SerializeField] InGameUIHandler gameUIHandler;  
 
     [SerializeField] Camera mainCamera;
-    [SerializeField] SceneHandler sceneHandler;
 
     [SerializeField] UnityEngine.Object powerPrefab;
     private NavMeshAgent powerObject;
@@ -35,7 +34,6 @@ public class GameHandler : MonoBehaviour
 
         // Correlations Related:
         relations = new List<SnapCorrelation>();
-        levelData = SceneHandler.Instance.CurrentLevel;
 
         BuildMap();
 
@@ -142,10 +140,5 @@ public class GameHandler : MonoBehaviour
         powerObject.isStopped = true;
         gameUIHandler.ToggleWinPanel();
         OnGameEnded?.Invoke();
-    }
-
-    public void HandleNextButton()
-    {
-        SceneHandler.Instance.LoadNextScene();
     }
 }

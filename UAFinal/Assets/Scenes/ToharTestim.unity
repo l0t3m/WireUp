@@ -798,6 +798,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 420185200}
+  - component: {fileID: 420185201}
   m_Layer: 0
   m_Name: SceneHandler
   m_TagString: Untagged
@@ -820,6 +821,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 573069947}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &420185201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 420185199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d84c7a10d4612f4c867116f60e9a1ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &458575848
 GameObject:
   m_ObjectHideFlags: 0
@@ -1288,7 +1301,6 @@ MonoBehaviour:
   levelData: {fileID: 11400000, guid: 9668c1e70c3fd724188c57d68d37f8fd, type: 2}
   gameUIHandler: {fileID: 502398594}
   mainCamera: {fileID: 330585545}
-  sceneHandler: {fileID: 0}
   powerPrefab: {fileID: 2197758990708874103, guid: e6ceb5486b2b2b645a943b07816f4f85, type: 3}
 --- !u!1 &748487850
 GameObject:
@@ -1814,7 +1826,7 @@ PrefabInstance:
     - target: {fileID: 638301682738556587, guid: 23d7649a601785441990a1f29d3b36b3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 420185201}
     - target: {fileID: 638301682738556587, guid: 23d7649a601785441990a1f29d3b36b3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: LoadMainMenu
@@ -1822,7 +1834,7 @@ PrefabInstance:
     - target: {fileID: 983350958892850873, guid: 23d7649a601785441990a1f29d3b36b3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 420185201}
     - target: {fileID: 983350958892850873, guid: 23d7649a601785441990a1f29d3b36b3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: LoadMainMenu
@@ -1830,10 +1842,10 @@ PrefabInstance:
     - target: {fileID: 1244932399079391095, guid: 23d7649a601785441990a1f29d3b36b3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 502398591}
+      objectReference: {fileID: 420185201}
     - target: {fileID: 1244932399079391095, guid: 23d7649a601785441990a1f29d3b36b3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: 
+      value: LoadMainMenu
       objectReference: {fileID: 0}
     - target: {fileID: 2472862512562721984, guid: 23d7649a601785441990a1f29d3b36b3, type: 3}
       propertyPath: m_Name
@@ -1862,7 +1874,7 @@ PrefabInstance:
     - target: {fileID: 5397340273495401767, guid: 23d7649a601785441990a1f29d3b36b3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 420185201}
     - target: {fileID: 5397340273495401767, guid: 23d7649a601785441990a1f29d3b36b3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ReloadScene
@@ -1870,19 +1882,19 @@ PrefabInstance:
     - target: {fileID: 6015231258122024187, guid: 23d7649a601785441990a1f29d3b36b3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 742657882}
+      objectReference: {fileID: 420185201}
     - target: {fileID: 6015231258122024187, guid: 23d7649a601785441990a1f29d3b36b3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: HandleNextButton
+      value: LoadNextScene
       objectReference: {fileID: 0}
     - target: {fileID: 6015231258122024187, guid: 23d7649a601785441990a1f29d3b36b3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: GameHandler, Assembly-CSharp
+      value: SceneHandler, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6198157561972327657, guid: 23d7649a601785441990a1f29d3b36b3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 420185201}
     - target: {fileID: 6198157561972327657, guid: 23d7649a601785441990a1f29d3b36b3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ReloadScene
