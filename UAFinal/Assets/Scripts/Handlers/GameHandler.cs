@@ -22,8 +22,8 @@ public class GameHandler : MonoBehaviour
     private void Start()
     {
         // UI Related:
-        //gameUIHandler.TitleText.text = levelData.LevelNumber.ToString();
-        //gameUIHandler.timer.StartValue = levelData.timerLength;
+        gameUIHandler.TitleText.text = levelData.LevelNumber.ToString();
+        gameUIHandler.timer.StartValue = levelData.timerLength;
 
         // Correlations Related:
         relations = new List<SnapCorrelation>();
