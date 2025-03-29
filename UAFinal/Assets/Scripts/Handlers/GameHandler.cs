@@ -28,9 +28,11 @@ public class GameHandler : MonoBehaviour
 
     private bool isFinished = false;
     private bool isStarted = false;
+    private bool attemptedRepath = false;
     private float idleTime = 5;
     [SerializeField] private const float idleTimeBase = 5;
     private Vector3 previousPosition;
+
 
     private void Start()
     {
@@ -64,15 +66,31 @@ public class GameHandler : MonoBehaviour
             if (Vector3.Distance(powerObject.transform.position, endObject.position) < 1.5f && !isFinished)
                 Win();
             else if (!isFinished && isStarted)
-            {              
+            {
                 if (Equals(previousPosition, powerObject.transform.position))
                 {
                     idleTime -= Time.deltaTime;
-                    if (idleTime <= 0f)
+                    if (idleTime < 3f && !attemptedRepath)
+                    {
+                        
+                        NavMeshHit hit;
+
+                        if (powerObject.SamplePathPosition(1, 1000, out hit))
+                        {
+                            hit.mask = 2;
+                        }
+                        powerObject.ResetPath();
+                        powerObject.SetDestination(endObject.position);
+                        attemptedRepath = true;
+                    }
+                    else if (idleTime <= 0f)
                         Lose();
                 }
                 else
+                {
                     idleTime = idleTimeBase;
+                    attemptedRepath = false;
+                }
             }
             previousPosition = powerObject.transform.position;
         }
@@ -100,6 +118,7 @@ public class GameHandler : MonoBehaviour
                     {
                         powerObject = Instantiate(powerPrefab, newPos, new Quaternion()).GameObject().GetComponent<NavMeshAgent>();
                         powerObject.isStopped = true;
+                        powerObject.obstacleAvoidanceType = ObstacleAvoidanceType.MedQualityObstacleAvoidance;
                     }
                     else if (currentSection == BlockSection.FinishSection)
                     {
@@ -119,8 +138,11 @@ public class GameHandler : MonoBehaviour
         relations.Add(currentSnap);
 
         SpawnNewBlock(block);
-        foreach (var link in block.GetComponentsInChildren<NavMeshLink>())       
-            link.UpdateLink();
+        foreach (var relation in relations)
+        {
+            foreach (var link in relation.block.GetComponentsInChildren<NavMeshLink>())
+                link.UpdateLink();
+        }
         
         currentSnap.ExecuteSnap();
     }
@@ -161,6 +183,32 @@ public class GameHandler : MonoBehaviour
         OnGameStarted?.Invoke();
         isStarted = true;
         powerObject.isStopped = false;
+        DetectDeadEnds();
+    }
+
+    private void DetectDeadEnds()
+    {
+        NavMeshPath path = new NavMeshPath();
+        Vector3 goalPos = endObject.position;
+
+        foreach (Snap snap in FindObjectsByType<Snap>(FindObjectsSortMode.None))
+        {
+            SnapCorrelation relation = GetSnapCorrelation(snap);
+            if (relation == null) continue;
+            Vector3 start = relation.block.transform.position;
+            if (NavMesh.SamplePosition(start, out NavMeshHit hit, 1f, NavMesh.AllAreas))
+            {
+                NavMesh.CalculatePath(hit.position, goalPos, NavMesh.AllAreas, path);
+
+                if (path.status != NavMeshPathStatus.PathComplete)
+                {
+                    // Dead end found - handle it
+                    Debug.Log($"Dead end at {relation.block.name}");                
+                }
+                else
+                    powerObject.path = path;
+            }
+        }
     }
 
     private void Win()
@@ -188,5 +236,25 @@ public class GameHandler : MonoBehaviour
     private void PlayRotateSound()
     {
         audioManager.PlaySound(AudioNames.Rotate);
+    }
+
+    private SnapCorrelation GetSnapCorrelation(Snap snap)
+    {
+        foreach (SnapCorrelation correlation in relations)
+        {
+            if (correlation.IsPartOfCorrelation(snap))
+                return correlation;
+        }
+        return null;
+    }
+
+    private SnapCorrelation GetSnapCorrelation(DragAndDrop block)
+    {
+        foreach (SnapCorrelation correlation in relations)
+        {
+            if (correlation.IsPartOfCorrelation(block))
+                return correlation;
+        }
+        return null;
     }
 }

@@ -3,6 +3,7 @@ using Unity.AI.Navigation;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using static Unity.Collections.AllocatorManager;
 
 [RequireComponent(typeof(Collider))]
 public class DragAndDrop : MonoBehaviour
@@ -74,7 +75,8 @@ public class DragAndDrop : MonoBehaviour
             transform.Rotate(new Vector3(0, isRotated ? -90 : 90, 0));
             isRotated = !isRotated;
             OnRotate?.Invoke();
-            GetComponentInChildren<NavMeshSurface>().BuildNavMesh();
+            foreach (var link in GetComponentsInChildren<NavMeshLink>())
+                link.UpdateLink();
         }
     }
 

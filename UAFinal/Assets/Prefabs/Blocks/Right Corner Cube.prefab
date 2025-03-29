@@ -144,7 +144,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3757538903554079218, guid: 16f4044163d769f4c9f08a82428eac01, type: 3}
       propertyPath: m_StartPoint.z
-      value: 0.4
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 3757538903554079218, guid: 16f4044163d769f4c9f08a82428eac01, type: 3}
       propertyPath: m_Bidirectional
@@ -160,11 +160,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8112765043731102895, guid: 16f4044163d769f4c9f08a82428eac01, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8112765043731102895, guid: 16f4044163d769f4c9f08a82428eac01, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8112765043731102895, guid: 16f4044163d769f4c9f08a82428eac01, type: 3}
       propertyPath: m_LocalPosition.x
@@ -220,7 +220,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8675624472336634425, guid: 16f4044163d769f4c9f08a82428eac01, type: 3}
       propertyPath: m_StartPoint.x
-      value: 0.4
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 8675624472336634425, guid: 16f4044163d769f4c9f08a82428eac01, type: 3}
       propertyPath: m_StartPoint.z
@@ -265,7 +265,7 @@ PrefabInstance:
     - target: {fileID: 8827787340826874600, guid: 16f4044163d769f4c9f08a82428eac01, type: 3}
       propertyPath: m_NavMeshData
       value: 
-      objectReference: {fileID: 23800000, guid: f53698b9261674d40adf68759182ea34, type: 2}
+      objectReference: {fileID: 23800000, guid: 9488335778a2ee743976cf8dd71b5155, type: 2}
     - target: {fileID: 8827787340826874600, guid: 16f4044163d769f4c9f08a82428eac01, type: 3}
       propertyPath: m_UseGeometry
       value: 0

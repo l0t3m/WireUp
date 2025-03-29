@@ -32,6 +32,7 @@ public class SceneHandler : MonoBehaviour
 
     public void LoadNextScene()
     {
+        Debug.Log(LevelHandler.Instance.IsLastLevel());
         if (LevelHandler.Instance.IsLastLevel())
             LoadMainMenu();
         else
