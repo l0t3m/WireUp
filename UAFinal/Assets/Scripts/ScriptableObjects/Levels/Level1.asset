@@ -19,4 +19,7 @@ MonoBehaviour:
   - types: 00000000000000000000000007000000
   ItemLimits: 01000000020000000100000001000000
   LevelNumber: 1
-  timerLength: 2
+  TimerLength: -1
+  TopBlockPosition: {x: 5, y: 0.05, z: 2}
+  TopLeftCorner: {x: -10, y: 0.4, z: 2}
+  BlockDistance: 2.5

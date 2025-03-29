@@ -19,9 +19,9 @@ public class BlockData : ScriptableObject
     [SerializeField] Object GridBlock;
     [SerializeField] Object Obstacle;
     [SerializeField] Object StraightSection;
+    [SerializeField] Object LeftCornerSection;
     [SerializeField] Object TSection;
     [SerializeField] Object RightCornerSection;
-    [SerializeField] Object LeftCornerSection;
     [SerializeField] Object StartSection;
     [SerializeField] Object FinishSection;
 
@@ -30,6 +30,7 @@ public class BlockData : ScriptableObject
     {
         return GridBlock;
     }
+
     public Object GetBlockByType(BlockSection blockType)
     {
         switch (blockType)

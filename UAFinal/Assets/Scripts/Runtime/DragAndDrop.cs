@@ -9,25 +9,24 @@ public class DragAndDrop : MonoBehaviour
     public event Action<DragAndDrop> OnUnsnap;
 
     public Camera currentCamera;
-    private Vector3 originalPosition;
-    private Quaternion originalRotation;
+    public Vector3 OriginalPosition;
 
     private bool isDragging = false;
     private bool isSnapped = false;
     private const float dragYLevel = 2.5f;
 
-    [HideInInspector] public int MaxOfType = 0;
+    [SerializeField] public BlockSection BlockSection;
 
     [SerializeField] bool canRotate = true;
     private bool isRotated = false;
-
+    [HideInInspector] public bool IsGenerated = false;
 
 
     private void Start()
     {
-        originalPosition = transform.position;
-        currentCamera = Camera.main;
+        OriginalPosition = transform.position;
     }
+
     private void OnMouseDown()
     {
         if (!isSnapped)
@@ -96,15 +95,12 @@ public class DragAndDrop : MonoBehaviour
 
     public void ResetPosition()
     {
-        transform.position = originalPosition;
+        transform.position = OriginalPosition;
     }
 
     public void DoSnap()
     {
-        isSnapped = true;
-        MaxOfType--;
-        if (MaxOfType > 0)
-            Instantiate(this, originalPosition, originalRotation);
+        isSnapped = true;        
     }
 
     /*public void DoUnsnap()

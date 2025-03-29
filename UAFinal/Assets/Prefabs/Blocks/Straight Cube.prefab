@@ -155,8 +155,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentCamera: {fileID: 0}
-  MaxOfType: 0
+  OriginalPosition: {x: 0, y: 0, z: 0}
+  BlockSection: 1
   canRotate: 1
+  IsGenerated: 0
 --- !u!54 &3090984335615154518
 Rigidbody:
   m_ObjectHideFlags: 0

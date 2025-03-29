@@ -184,6 +184,14 @@ PrefabInstance:
       propertyPath: BlockType
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3000318598770157454, guid: 16f4044163d769f4c9f08a82428eac01, type: 3}
+      propertyPath: BlockSection
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3000318598770157454, guid: 16f4044163d769f4c9f08a82428eac01, type: 3}
+      propertyPath: blockSection
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3090984335615154518, guid: 16f4044163d769f4c9f08a82428eac01, type: 3}
       propertyPath: m_Drag
       value: 0

@@ -122,6 +122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentCamera: {fileID: 0}
-  BlockType: 6
-  MaxOfType: 0
+  OriginalPosition: {x: 0, y: 0, z: 0}
+  BlockSection: 6
   canRotate: 0
+  IsGenerated: 0

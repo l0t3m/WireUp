@@ -14,7 +14,21 @@ public class LevelScriptableObject : ScriptableObject
     }
 
     [SerializeField] public rowData[] LevelsMap = new rowData[4];
-    [SerializeField] public int[] ItemLimits;
+    [SerializeField] private int[] ItemLimits;
     [SerializeField] public int LevelNumber = 0;
-    [SerializeField] public float timerLength = -1;
+    [SerializeField] public float TimerLength = -1;
+    [SerializeField] public Vector3 TopBlockPosition;
+    [SerializeField] public Vector3 TopLeftCorner;
+    [SerializeField] public float BlockDistance = 10f;
+
+    public int GetItemLimit(BlockSection section)
+    {
+        int sectionNum = (int)section - 1;
+        return sectionNum >= ItemLimits.Length ? -1 : ItemLimits[sectionNum];
+    }
+
+    public int GetLimitsLength()
+    {
+        return ItemLimits.Length;
+    }
 }
