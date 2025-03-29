@@ -6,17 +6,17 @@ using UnityEngine.EventSystems;
 [RequireComponent(typeof(Collider))]
 public class DragAndDrop : MonoBehaviour
 {
-    public event Action<DragAndDrop> OnUnsnap;
 
     [HideInInspector] public Camera currentCamera;
     [HideInInspector] public Vector3 OriginalPosition;
 
     private bool isDragging = false;
     private bool isSnapped = false;
-    private const float dragYLevel = 2.5f;
+    private const float dragYLevel = 1.5f;
 
     [SerializeField] public BlockSection BlockSection;
 
+    [SerializeField] bool canPickUp = true;
     [SerializeField] bool canRotate = true;
     private bool isRotated = false;
     [HideInInspector] public bool IsGenerated = false;
@@ -29,14 +29,14 @@ public class DragAndDrop : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (!isSnapped)
+        if (!isSnapped && canPickUp)
             isDragging = true;
 
     }
 
     private void OnMouseDrag()
     {
-        if (isDragging)
+        if (isDragging && canPickUp)
         {
             Vector3 mouseWorld = GetMouseWorldPosition();
             Vector3 targetPosition = mouseWorld;
@@ -46,6 +46,7 @@ public class DragAndDrop : MonoBehaviour
 
     private void OnMouseUp()
     {
+
         isDragging = false;
 
         if (TryGetComponent<Rigidbody>(out var rb))
@@ -86,9 +87,7 @@ public class DragAndDrop : MonoBehaviour
         Plane dragPlane = new Plane(Vector3.up, new Vector3(0, dragYLevel, 0)); 
 
         if (dragPlane.Raycast(ray, out float enter))
-        {
             return ray.GetPoint(enter);
-        }
 
         return transform.position;
     }
@@ -100,19 +99,19 @@ public class DragAndDrop : MonoBehaviour
 
     public void DoSnap()
     {
-        isSnapped = true;        
+        isSnapped = true;   
+        GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Continuous;
     }
-
-    /*public void DoUnsnap()
-    {
-        isSnapped = false;
-        MaxOfType++;
-    }*/
 
     private void ResetBlock()
     {
-        OnUnsnap?.Invoke(this);
         isDragging = false;
         ResetPosition();
+    }
+
+    public void DisableActions()
+    {
+        canPickUp = false;
+        canRotate = false;
     }
 }

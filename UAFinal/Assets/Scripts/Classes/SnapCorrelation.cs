@@ -13,13 +13,7 @@ public class SnapCorrelation
     {
         grid.DoSnap(block.gameObject);
         block.DoSnap();
-    }
-
-    public void ExecuteUnsnap()
-    {
-        //grid.DoUnsnap();
-        //block.DoUnsnap();
-    }
+    } 
 
     public bool IsPartOfCorrelation(object obj)
     {

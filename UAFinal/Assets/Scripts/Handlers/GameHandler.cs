@@ -1,9 +1,9 @@
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UIElements;
 using static LevelScriptableObject;
 
 public class GameHandler : MonoBehaviour
@@ -16,12 +16,15 @@ public class GameHandler : MonoBehaviour
 
     [SerializeField] Camera mainCamera;
 
-    [SerializeField] Object powerPrefab;
+    [SerializeField] UnityEngine.Object powerPrefab;
     private NavMeshAgent powerObject;
+    private Transform endObject;
 
     private Dictionary<BlockSection, int> itemLimits = new Dictionary<BlockSection, int>();
 
-    
+    private event Action OnGameEnded;
+
+    private bool isFinished = false;
 
     private void Start()
     {
@@ -42,6 +45,15 @@ public class GameHandler : MonoBehaviour
             itemLimits.Add(section, levelData.GetItemLimit(section));
             SpawnNewBlock(section);
             gameUIHandler.UpdateBlocksLeftText(section, levelData.GetItemLimit(section));
+        }
+    }
+
+    private void Update()
+    {
+        if (powerObject != null)
+        {
+            if (Vector3.Distance(powerObject.transform.position, endObject.position) < 1f && !isFinished)   
+                Win();
         }
     }
 
@@ -66,11 +78,12 @@ public class GameHandler : MonoBehaviour
                     {
                         newPos.y += 0.5f;
                         powerObject = Instantiate(powerPrefab, newPos, new Quaternion()).GameObject().GetComponent<NavMeshAgent>();
+                        powerObject.isStopped = true;
                     }
                     else if (currentSection == BlockSection.FinishSection)
                     {
                         powerObject.SetDestination(newPos);
-                        powerObject.isStopped = true;
+                        endObject = dragndrop.transform;
                     }
                 }
             }
@@ -114,29 +127,19 @@ public class GameHandler : MonoBehaviour
     {
         block.currentCamera = mainCamera;
         block.OriginalPosition = block.transform.position;
-    }
-
-    private void HandleUnsnap(DragAndDrop block)
-    {
-        SnapCorrelation currentCurrelation = null;
-        foreach (var Correlation in relations)
-        {
-            if (Correlation.IsPartOfCorrelation(block))
-            {
-                currentCurrelation = Correlation;
-                break;
-            }
-        }
-
-        if (currentCurrelation == null)
-            return;
-
-        currentCurrelation.ExecuteUnsnap();
-        relations.Remove(currentCurrelation);
+        OnGameEnded += block.DisableActions;
     }
 
     public void BeginAgentMovement()
     {
         powerObject.isStopped = false;
+    }
+
+    private void Win()
+    {
+        isFinished = true;
+        powerObject.isStopped = true;
+        gameUIHandler.ToggleWinPanel();
+        OnGameEnded?.Invoke();
     }
 }

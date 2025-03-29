@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4595055950428722459}
   - component: {fileID: 4154711310552640636}
   - component: {fileID: 4165161102376100955}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,6 +126,22 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 3757538903554079218, guid: 16f4044163d769f4c9f08a82428eac01, type: 3}
+      propertyPath: m_EndPoint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3757538903554079218, guid: 16f4044163d769f4c9f08a82428eac01, type: 3}
+      propertyPath: m_EndPoint.z
+      value: 1.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3757538903554079218, guid: 16f4044163d769f4c9f08a82428eac01, type: 3}
+      propertyPath: m_StartPoint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3757538903554079218, guid: 16f4044163d769f4c9f08a82428eac01, type: 3}
+      propertyPath: m_StartPoint.z
+      value: 0.75
+      objectReference: {fileID: 0}
     - target: {fileID: 7268605627017552596, guid: 16f4044163d769f4c9f08a82428eac01, type: 3}
       propertyPath: m_Name
       value: Right Corner Cube
@@ -173,6 +189,14 @@ PrefabInstance:
     - target: {fileID: 8112765043731102895, guid: 16f4044163d769f4c9f08a82428eac01, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8675624472336634425, guid: 16f4044163d769f4c9f08a82428eac01, type: 3}
+      propertyPath: m_EndPoint.x
+      value: 1.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8675624472336634425, guid: 16f4044163d769f4c9f08a82428eac01, type: 3}
+      propertyPath: m_StartPoint.x
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 8827787340826874600, guid: 16f4044163d769f4c9f08a82428eac01, type: 3}
       propertyPath: m_NavMeshData

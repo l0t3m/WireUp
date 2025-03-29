@@ -22,10 +22,7 @@ public class Snap : MonoBehaviour
         isOccupied = true;
     }
 
-    public void DoUnsnap()
-    {
-        isOccupied = false;
-    }
+   
 
     private bool CanSnapOntoMe(string tag)
     {

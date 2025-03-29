@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6072754108340130334}
   - component: {fileID: 3414817421496133171}
   - component: {fileID: -4564456763181956102}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,5 +126,6 @@ MonoBehaviour:
   currentCamera: {fileID: 0}
   OriginalPosition: {x: 0, y: 0, z: 0}
   BlockSection: 5
+  canPickUp: 0
   canRotate: 0
   IsGenerated: 0
