@@ -1,11 +1,12 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class SceneHandler : MonoBehaviour
 {
     public static SceneHandler Instance;
     [SerializeField] LevelScriptableObject[] Levels;
-    public LevelScriptableObject CurrentLevel;
+    [HideInInspector] public LevelScriptableObject CurrentLevel;
 
     void Awake()
     {
@@ -28,13 +29,13 @@ public class SceneHandler : MonoBehaviour
 
     public void LoadMainMenu()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
     }
 
     public void LoadGameScene()
     {
-        CurrentLevel = Levels[0];
-        SceneManager.LoadScene(1);
+        CurrentLevel = Levels[0]; // Fix
+        SceneManager.LoadScene(2);
     }
 
     public void QuitGame()
@@ -49,6 +50,12 @@ public class SceneHandler : MonoBehaviour
 
     public void LoadNextScene()
     {
-        
+        if (CurrentLevel == Levels[Levels.Length-1])
+            LoadMainMenu();
+        else
+        {
+            CurrentLevel = Levels[CurrentLevel.LevelNumber];
+            ReloadScene();
+        }
     }
 }

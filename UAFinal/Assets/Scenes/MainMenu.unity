@@ -867,6 +867,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23368314a4f4e334cbc5a36237e87447, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StartValue: 60
 --- !u!114 &682000210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3021,6 +3022,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d84c7a10d4612f4c867116f60e9a1ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Levels:
+  - {fileID: 11400000, guid: 9668c1e70c3fd724188c57d68d37f8fd, type: 2}
+  - {fileID: 11400000, guid: d3de3eb7c633a5845bfd0817d019d70c, type: 2}
+  - {fileID: 11400000, guid: 6b0c81931effd864e86e19ab44857dba, type: 2}
+  - {fileID: 11400000, guid: 48e40a1bf397b6a4880fa8bd93364ca3, type: 2}
+  - {fileID: 11400000, guid: 69d51952571d5454898263748c09a36e, type: 2}
+  - {fileID: 11400000, guid: e34f3d2763ecfef47aff511b298f10e1, type: 2}
+  - {fileID: 11400000, guid: e251d37fa66da434d97f2a310c6f1eae, type: 2}
+  CurrentLevel: {fileID: 0}
 --- !u!1 &1868075346
 GameObject:
   m_ObjectHideFlags: 0
