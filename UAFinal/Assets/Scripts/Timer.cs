@@ -19,11 +19,11 @@ public class Timer : MonoBehaviour
     {
         if (timer == -1)
         {
-            this.GetComponent<TextMeshProUGUI>().text = "--.--";
+            this.GetComponent<TextMeshProUGUI>().text = "--.--".Replace('.',':');
         }
         else if (timer > 0f)
         {
-            this.GetComponent<TextMeshProUGUI>().text = timer.ToString("00.00");
+            this.GetComponent<TextMeshProUGUI>().text = timer.ToString("00.00").Replace('.', ':');
             timer -= Time.deltaTime;
         }
         else
