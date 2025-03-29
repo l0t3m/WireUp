@@ -57,11 +57,12 @@ public class GameHandler : MonoBehaviour
     {
         if (powerObject != null)
         {
-            if (Vector3.Distance(powerObject.transform.position, endObject.position) < 1f && !isFinished)
+            Debug.DrawLine(powerObject.transform.position, endObject.transform.position);
+            if (Vector3.Distance(powerObject.transform.position, endObject.position) < 1.5f && !isFinished)
                 Win();
             else if (!isFinished && isStarted)
             {
-                if (Vector3.Equals(previousPosition, powerObject.transform.position))
+                if (Equals(previousPosition, powerObject.transform.position))
                 {
                     idleTime -= Time.deltaTime;
                     if (idleTime <= 0f)
@@ -87,18 +88,19 @@ public class GameHandler : MonoBehaviour
                 currentGrid.OnSnap += HandleSnap;
                 if (currentSection != BlockSection.Empty)
                 {
-                    newPos.y += 0.5f;
+                    newPos.y += 0.75f;
                     DragAndDrop dragndrop = Instantiate(blockData.GetBlockByType(currentSection), newPos, new Quaternion()).GameObject().GetComponent<DragAndDrop>();
                     dragndrop.IsGenerated = true;
                     ExecuteNewPlaceableBlock(dragndrop);
+                    newPos.y += 0.5f;
                     if (currentSection == BlockSection.StartSection)
                     {
-                        newPos.y += 0.5f;
                         powerObject = Instantiate(powerPrefab, newPos, new Quaternion()).GameObject().GetComponent<NavMeshAgent>();
                         powerObject.isStopped = true;
                     }
                     else if (currentSection == BlockSection.FinishSection)
                     {
+                        newPos.y += 2.5f;
                         powerObject.SetDestination(newPos);
                         endObject = dragndrop.transform;
                     }

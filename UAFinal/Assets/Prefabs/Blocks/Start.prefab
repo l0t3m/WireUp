@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1026736312124486860}
   - component: {fileID: 2941981441352966822}
   - component: {fileID: 5761161809176264650}
+  - component: {fileID: -4563136882523465216}
   m_Layer: 7
   m_Name: Start
   m_TagString: Untagged
@@ -146,23 +147,43 @@ MonoBehaviour:
   m_SerializedVersion: 0
   m_AgentTypeID: 0
   m_CollectObjects: 2
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 2, z: 0}
+  m_Size: {x: 2.5, y: 1.5, z: 2.5}
+  m_Center: {x: 0, y: 0, z: 0}
   m_LayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_UseGeometry: 0
+  m_UseGeometry: 1
   m_DefaultArea: 0
-  m_GenerateLinks: 1
+  m_GenerateLinks: 0
   m_IgnoreNavMeshAgent: 1
   m_IgnoreNavMeshObstacle: 1
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.033333335
+  m_VoxelSize: 0.06666667
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: b608f6e6a38ef5d47b4c746cecb66e96, type: 2}
   m_BuildHeightMesh: 0
+--- !u!114 &-4563136882523465216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2414545903294726928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedVersion: 0
+  m_OverrideArea: 1
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &5885570106642853522
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,12 +233,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SerializedVersion: 1
   m_AgentTypeID: 0
-  m_StartPoint: {x: 0, y: 0, z: 0.75}
+  m_StartPoint: {x: 0, y: 0, z: 0.5}
   m_EndPoint: {x: 0, y: 0, z: 1.8}
   m_StartTransform: {fileID: 0}
   m_EndTransform: {fileID: 0}
   m_Activated: 1
-  m_Width: 0
+  m_Width: 1
   m_CostModifier: 1
   m_IsOverridingCost: 0
   m_Bidirectional: 1
@@ -237,12 +258,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SerializedVersion: 1
   m_AgentTypeID: 0
-  m_StartPoint: {x: 0, y: 0, z: -0.75}
+  m_StartPoint: {x: 0, y: 0, z: -0.5}
   m_EndPoint: {x: 0, y: 0, z: -1.8}
   m_StartTransform: {fileID: 0}
   m_EndTransform: {fileID: 0}
   m_Activated: 1
-  m_Width: 0
+  m_Width: 1
   m_CostModifier: 1
   m_IsOverridingCost: 0
   m_Bidirectional: 1
@@ -262,12 +283,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SerializedVersion: 1
   m_AgentTypeID: 0
-  m_StartPoint: {x: 0.75, y: 0, z: 0}
+  m_StartPoint: {x: 0.5, y: 0, z: 0}
   m_EndPoint: {x: 1.8, y: 0, z: 0}
   m_StartTransform: {fileID: 0}
   m_EndTransform: {fileID: 0}
   m_Activated: 1
-  m_Width: 0
+  m_Width: 1
   m_CostModifier: 1
   m_IsOverridingCost: 0
   m_Bidirectional: 1
@@ -287,12 +308,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SerializedVersion: 1
   m_AgentTypeID: 0
-  m_StartPoint: {x: -0.75, y: 0, z: 0}
+  m_StartPoint: {x: -0.5, y: 0, z: 0}
   m_EndPoint: {x: -1.8, y: 0, z: 0}
   m_StartTransform: {fileID: 0}
   m_EndTransform: {fileID: 0}
   m_Activated: 1
-  m_Width: 0
+  m_Width: 1
   m_CostModifier: 1
   m_IsOverridingCost: 0
   m_Bidirectional: 1
