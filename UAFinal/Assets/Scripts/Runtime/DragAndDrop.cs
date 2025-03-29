@@ -1,4 +1,5 @@
 using System;
+using Unity.AI.Navigation;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -6,6 +7,7 @@ using UnityEngine.EventSystems;
 [RequireComponent(typeof(Collider))]
 public class DragAndDrop : MonoBehaviour
 {
+    public event Action OnRotate;
 
     [HideInInspector] public Camera currentCamera;
     [HideInInspector] public Vector3 OriginalPosition;
@@ -71,6 +73,8 @@ public class DragAndDrop : MonoBehaviour
         {
             transform.Rotate(new Vector3(0, isRotated ? -90 : 90, 0));
             isRotated = !isRotated;
+            OnRotate?.Invoke();
+            GetComponentInChildren<NavMeshSurface>().BuildNavMesh();
         }
     }
 
@@ -101,6 +105,7 @@ public class DragAndDrop : MonoBehaviour
     {
         isSnapped = true;   
         GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Continuous;
+        GetComponentInChildren<NavMeshSurface>().BuildNavMesh();
     }
 
     private void ResetBlock()

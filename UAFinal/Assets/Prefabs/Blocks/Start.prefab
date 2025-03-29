@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 1026736312124486860}
   - component: {fileID: 2941981441352966822}
   - component: {fileID: 5761161809176264650}
-  - component: {fileID: -4563136882523465216}
   m_Layer: 7
   m_Name: Start
   m_TagString: Untagged
@@ -160,30 +159,10 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.06666667
+  m_VoxelSize: 0.033333335
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: b608f6e6a38ef5d47b4c746cecb66e96, type: 2}
   m_BuildHeightMesh: 0
---- !u!114 &-4563136882523465216
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2414545903294726928}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SerializedVersion: 0
-  m_OverrideArea: 1
-  m_Area: 0
-  m_OverrideGenerateLinks: 0
-  m_GenerateLinks: 0
-  m_IgnoreFromBuild: 0
-  m_ApplyToChildren: 1
-  m_AffectedAgents: ffffffff
 --- !u!1 &5885570106642853522
 GameObject:
   m_ObjectHideFlags: 0

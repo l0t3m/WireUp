@@ -1,10 +1,13 @@
 using NUnit.Framework;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using static LevelScriptableObject;
+using static Unity.Collections.AllocatorManager;
 
 public class GameHandler : MonoBehaviour
 {
@@ -15,6 +18,7 @@ public class GameHandler : MonoBehaviour
     [SerializeField] Camera mainCamera;
     [SerializeField] UnityEngine.Object powerPrefab;
     [SerializeField] SceneHandler sceneHandler;
+    [SerializeField] AudioManager audioManager;
     LevelScriptableObject levelData;
     private NavMeshAgent powerObject;
     private Transform endObject;
@@ -56,12 +60,11 @@ public class GameHandler : MonoBehaviour
     private void Update()
     {
         if (powerObject != null)
-        {
-            Debug.DrawLine(powerObject.transform.position, endObject.transform.position);
+        {           
             if (Vector3.Distance(powerObject.transform.position, endObject.position) < 1.5f && !isFinished)
                 Win();
             else if (!isFinished && isStarted)
-            {
+            {              
                 if (Equals(previousPosition, powerObject.transform.position))
                 {
                     idleTime -= Time.deltaTime;
@@ -116,7 +119,9 @@ public class GameHandler : MonoBehaviour
         relations.Add(currentSnap);
 
         SpawnNewBlock(block);
-
+        foreach (var link in block.GetComponentsInChildren<NavMeshLink>())       
+            link.UpdateLink();
+        
         currentSnap.ExecuteSnap();
     }
 
@@ -137,8 +142,9 @@ public class GameHandler : MonoBehaviour
         {
             Vector3 newPos = levelData.TopBlockPosition;
             newPos.z -= ((int)section-1) * levelData.BlockDistance;
-
-            ExecuteNewPlaceableBlock(Instantiate(blockData.GetBlockByType(section), newPos, new Quaternion()).GameObject().GetComponent<DragAndDrop>());
+            DragAndDrop block = Instantiate(blockData.GetBlockByType(section), newPos, new Quaternion()).GameObject().GetComponent<DragAndDrop>();
+            block.OnRotate += PlayRotateSound;
+            ExecuteNewPlaceableBlock(block);
         }
     }
 
@@ -147,6 +153,7 @@ public class GameHandler : MonoBehaviour
         block.currentCamera = mainCamera;
         block.OriginalPosition = block.transform.position;
         OnGameStarted += block.DisableActions;
+        
     }
 
     public void BeginAgentMovement()
@@ -161,6 +168,7 @@ public class GameHandler : MonoBehaviour
         isFinished = true;
         powerObject.isStopped = true;
         gameUIHandler.ToggleWinPanel();
+        audioManager.PlaySound(AudioNames.Win);
     }
 
     private void Lose()
@@ -168,11 +176,17 @@ public class GameHandler : MonoBehaviour
         isFinished = true;
         powerObject.isStopped = true;
         gameUIHandler.ToggleLosePanel();
+        audioManager.PlaySound(AudioNames.Lose);
     }
 
     public void NextButtonPressed()
     {
         LevelHandler.Instance.LevelComplete();
         sceneHandler.LoadNextScene();
+    }
+
+    private void PlayRotateSound()
+    {
+        audioManager.PlaySound(AudioNames.Rotate);
     }
 }

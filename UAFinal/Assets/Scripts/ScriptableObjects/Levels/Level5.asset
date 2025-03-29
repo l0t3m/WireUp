@@ -20,6 +20,6 @@ MonoBehaviour:
   ItemLimits: 0a0000000a0000000a0000000a000000
   LevelNumber: 5
   TimerLength: 75
-  TopBlockPosition: {x: 5.5, y: 0.4, z: 3.3}
-  TopLeftCorner: {x: -10, y: 0.4, z: 3.3}
+  TopBlockPosition: {x: 5.5, y: 0.4, z: 28.3}
+  TopLeftCorner: {x: -10, y: 0.4, z: 28.3}
   BlockDistance: 2.5

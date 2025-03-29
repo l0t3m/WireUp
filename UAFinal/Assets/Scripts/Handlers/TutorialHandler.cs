@@ -7,7 +7,10 @@ public class TutorialHandler : MonoBehaviour
 
     private void Start()
     {
-        TutorialParts[currentPart].SetActive(true);
+        if (LevelHandler.Instance.GetLevel().LevelNumber == 1)
+            TutorialParts[currentPart].SetActive(true);
+        else
+            gameObject.SetActive(false);
     }
 
     public void ShowNext()
