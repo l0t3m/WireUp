@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2414545903294726928, guid: 8e2d884c28bf1b5478706846b4279854, type: 3}
       propertyPath: m_Name
-      value: end
+      value: End
       objectReference: {fileID: 0}
     - target: {fileID: 2941981441352966822, guid: 8e2d884c28bf1b5478706846b4279854, type: 3}
       propertyPath: BlockSection
@@ -57,7 +57,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5305331785226163741, guid: 8e2d884c28bf1b5478706846b4279854, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e2d884c28bf1b5478706846b4279854, type: 3}
