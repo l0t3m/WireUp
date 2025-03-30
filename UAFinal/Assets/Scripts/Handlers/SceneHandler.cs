@@ -21,8 +21,9 @@ public class SceneHandler : MonoBehaviour
 
     public void LoadGameScene()
     {
-        LevelHandler.Instance.LoadLevel(saveHandler.LoadHighestLevel());
-        SceneManager.LoadScene(2);
+        int level = saveHandler.LoadHighestLevel();
+        LevelHandler.Instance.LoadLevel(level == LevelHandler.Instance.GetLevelsLength() ? 0 : level);
+        SceneManager.LoadScene(1);
     }
 
     public void QuitGame()

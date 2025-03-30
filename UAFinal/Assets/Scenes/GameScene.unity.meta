@@ -1,5 +1,10 @@
 fileFormatVersion: 2
-guid: 99c9720ab356a0642a771bea13969a05
+<<<<<<<< HEAD:UAFinal/Assets/Resources.meta
+guid: 19b5c61343435004aaa041037d707aff
+folderAsset: yes
+========
+guid: 7c3cb6e2c92f01546a4d62f226dfdb45
+>>>>>>>> main:UAFinal/Assets/Scenes/ToharTestim 1.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

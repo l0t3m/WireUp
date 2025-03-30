@@ -131,7 +131,7 @@ MonoBehaviour:
   canPickUp: 0
   canRotate: 0
   IsGenerated: 0
-  poweredMaterial: {fileID: 0}
+  poweredMaterial: {fileID: 2100000, guid: 736e8c6a8671fc24e8a70dff46b64402, type: 2}
 --- !u!114 &5761161809176264650
 MonoBehaviour:
   m_ObjectHideFlags: 0
