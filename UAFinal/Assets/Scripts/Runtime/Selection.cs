@@ -61,7 +61,6 @@ public class Selection : MonoBehaviour
                 }
             }
         }
-
     }
 
     private void ChangeChildrenMaterial(Transform parent, Material material)

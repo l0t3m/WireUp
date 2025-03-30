@@ -31,6 +31,7 @@ public class GameHandler : MonoBehaviour
     private float idleTime = 5;
     [SerializeField] float idleTimeBase = 5;
     private Vector3 previousPosition;
+    private GameObject previousNavMeshOwner;
 
 
     private void Start()
@@ -78,6 +79,17 @@ public class GameHandler : MonoBehaviour
                     idleTime = idleTimeBase;
             }
             previousPosition = powerObject.transform.position;
+            
+            if (powerObject.isOnNavMesh)
+            {
+                GameObject currentOwner = powerObject.navMeshOwner.GameObject();
+                if (previousNavMeshOwner == currentOwner)
+                {
+                    previousNavMeshOwner = currentOwner;
+                    currentOwner.GetComponent<DragAndDrop>().ChangeColor();
+
+                }
+            }
         }
     }
 
@@ -161,6 +173,7 @@ public class GameHandler : MonoBehaviour
             newPos.z -= ((int)section-1) * levelData.BlockDistance;
             DragAndDrop block = Instantiate(blockData.GetBlockByType(section), newPos, new Quaternion()).GameObject().GetComponent<DragAndDrop>();
             block.OnRotate += PlayRotateSound;
+            
             ExecuteNewPlaceableBlock(block);
         }
     }
