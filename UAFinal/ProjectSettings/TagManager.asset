@@ -8,6 +8,8 @@ TagManager:
   - Ground
   - GridItem
   - Power
+  - FxTemporaire
+  - Obstacle
   layers:
   - Default
   - TransparentFX

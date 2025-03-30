@@ -245,6 +245,7 @@ MonoBehaviour:
   canPickUp: 1
   canRotate: 1
   IsGenerated: 0
+  poweredMaterial: {fileID: 0}
 --- !u!54 &3090984335615154518
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -300,7 +301,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.016666668
+  m_VoxelSize: 0.083333336
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 8d4345f5f18424045a81108b40987e9d, type: 2}
   m_BuildHeightMesh: 0

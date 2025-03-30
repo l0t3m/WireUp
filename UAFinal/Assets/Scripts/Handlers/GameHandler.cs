@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 using static LevelScriptableObject;
@@ -87,7 +88,7 @@ public class GameHandler : MonoBehaviour
                 if (previousNavMeshOwner == currentOwner)
                 {
                     previousNavMeshOwner = currentOwner;
-                    currentOwner.GetComponent<DragAndDrop>().ChangeColor();
+                    //currentOwner.GetComponent<DragAndDrop>().ChangeColor();
 
                 }
             }
@@ -139,19 +140,15 @@ public class GameHandler : MonoBehaviour
     private void HandleSnap(Snap grid, DragAndDrop block)
     {
         // if relation exists, dip
+        Debug.Log(relations.Find(relation => relation.IsPartOfCorrelation(grid, block)) != null);
         if (relations.Find(relation => relation.IsPartOfCorrelation(grid, block)) != null) return;
         SnapCorrelation currentSnap = new SnapCorrelation(grid, block);
         relations.Add(currentSnap);
 
         // spawn the block's type on the right platform
-        SpawnNewBlock(block);
-        // updates all links in all relations because this game doesn't want to work without this
-        foreach (var relation in relations)
-        {
-            foreach (var link in relation.block.GetComponentsInChildren<NavMeshLink>())
-                link.UpdateLink();
-        }
-        
+        if (!DragAndDrop.IsObstacle(block))
+            SpawnNewBlock(block);
+        // updates all links in all relations because this game doesn't want to work without this  
         currentSnap.ExecuteSnap();
     }
 
@@ -173,8 +170,7 @@ public class GameHandler : MonoBehaviour
             Vector3 newPos = levelData.TopBlockPosition;
             newPos.z -= ((int)section-1) * levelData.BlockDistance;
             DragAndDrop block = Instantiate(blockData.GetBlockByType(section), newPos, new Quaternion()).GameObject().GetComponent<DragAndDrop>();
-            block.OnRotate += PlayRotateSound;
-            
+            block.OnRotate += PlayRotateSound;          
             ExecuteNewPlaceableBlock(block);
         }
     }

@@ -11,8 +11,11 @@ public class Snap : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        DragAndDrop dragndrop = collision.gameObject.GetComponent<DragAndDrop>();
         if (CanSnapOntoMe(collision.gameObject.tag))
-            OnSnap?.Invoke(this, collision.gameObject.GetComponent<DragAndDrop>());   
+            OnSnap?.Invoke(this, dragndrop);
+        else
+            dragndrop.ResetPosition();
     }
 
     public void DoSnap(GameObject obj)
@@ -27,6 +30,6 @@ public class Snap : MonoBehaviour
 
     private bool CanSnapOntoMe(string tag)
     {
-        return tag == "BlockPiece" && !isOccupied;
+        return (tag == "Obstacle" || tag == "BlockPiece") && !isOccupied;
     }
 }

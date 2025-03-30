@@ -28,16 +28,13 @@ public class LevelHandler : MonoBehaviour
         currentLevel = levels[0];
     }
 
-    public int LevelComplete()
+    public bool LevelComplete()
     {
         int levelNumber = currentLevel.LevelNumber;
         if (!IsLastLevel())
-        {
             currentLevel = levels[currentLevel.LevelNumber];
-            return currentLevel.LevelNumber;
-        }
-        else
-            return currentLevel.LevelNumber + 1;
+        levelNumber++;
+        return levelNumber == levels.Length+1;
     }
 
     private bool IsLastLevel()

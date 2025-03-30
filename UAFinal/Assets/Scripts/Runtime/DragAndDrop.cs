@@ -58,9 +58,7 @@ public class DragAndDrop : MonoBehaviour
 
     private void OnMouseUp()
     {
-
         isDragging = false;
-
         if (TryGetComponent<Rigidbody>(out var rb))
         {
             rb.linearVelocity = Vector3.zero;
@@ -78,8 +76,8 @@ public class DragAndDrop : MonoBehaviour
     }  
 
     private void OnMouseOver()
-    {
-        if (Input.GetMouseButtonDown(1) && isSnapped && canRotate)
+    {    
+        if (Input.GetMouseButtonDown(1) && isSnapped && canRotate && !IsObstacle(this))
         {
             transform.Rotate(new Vector3(0, isRotated ? -90 : 90, 0));
             isRotated = !isRotated;
@@ -93,11 +91,7 @@ public class DragAndDrop : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ground" || (collision.gameObject.tag == "BlockPiece") && !isSnapped)
             ResetPosition();
-
-       
     }
-
-
 
     // Methods:
     private Vector3 GetMouseWorldPosition()
@@ -120,7 +114,8 @@ public class DragAndDrop : MonoBehaviour
     {
         isSnapped = true;   
         GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Continuous;
-        GetComponentInChildren<NavMeshSurface>().BuildNavMesh();
+        if (!IsObstacle(this))
+            GetComponentInChildren<NavMeshSurface>().BuildNavMesh();
     }
 
     private void ResetBlock()
@@ -133,5 +128,10 @@ public class DragAndDrop : MonoBehaviour
     {
         canPickUp = false;
         canRotate = false;
+    }
+
+    public static bool IsObstacle(DragAndDrop block)
+    {
+        return block.tag.Equals("Obstacle");
     }
 }
