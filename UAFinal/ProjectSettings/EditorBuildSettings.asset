@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/GameScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
+    path: Assets/Scenes/ToharTestim 1.unity
+    guid: 7c3cb6e2c92f01546a4d62f226dfdb45
+  - enabled: 1
     path: Assets/Scenes/ToharTestim.unity
     guid: 06c3d9cbbb4a088459dad87329a4f043
   m_configObjects:
