@@ -255,9 +255,11 @@ public class GameHandler : MonoBehaviour
 
     public void NextButtonPressed()
     {
-        LevelHandler.Instance.LevelComplete();
-        bool isComplete = LevelHandler.Instance.GetLevel().LevelNumber == LevelHandler.Instance.GetLevelsLength()+1;
-        saveHandler.SaveHighestLevel(isComplete ? 1 : LevelHandler.Instance.GetLevel().LevelNumber);
+        int levelnum = LevelHandler.Instance.LevelComplete();
+        Debug.Log(levelnum);
+        Debug.Log(LevelHandler.Instance.GetLevelsLength());
+        bool isComplete = levelnum == LevelHandler.Instance.GetLevelsLength()+1;
+        saveHandler.SaveHighestLevel(isComplete ? 0 : LevelHandler.Instance.GetLevel().LevelNumber);
         sceneHandler.LoadNextScene(isComplete);
     }
 

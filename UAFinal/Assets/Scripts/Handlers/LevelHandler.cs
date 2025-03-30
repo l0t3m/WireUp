@@ -39,7 +39,7 @@ public class LevelHandler : MonoBehaviour
         currentLevel = levels[level];
     }
 
-    public bool LevelComplete()
+    public int LevelComplete()
     {
         int levelNumber = currentLevel.LevelNumber;
         levelNumber++;
@@ -47,7 +47,7 @@ public class LevelHandler : MonoBehaviour
             currentLevel = levels[currentLevel.LevelNumber];
 
             
-        return levelNumber == levels.Length+1;
+        return levelNumber;
     }
 
     private bool IsLastLevel()
