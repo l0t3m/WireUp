@@ -31,10 +31,7 @@ public class GameHandler : MonoBehaviour
     private float idleTime = 5;
     [SerializeField] float idleTimeBase = 5;
     private Vector3 previousPosition;
-<<<<<<< HEAD
 
-=======
->>>>>>> parent of 12f7da8 (added new feature)
 
     private void Start()
     {
