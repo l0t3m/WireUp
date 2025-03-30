@@ -306,7 +306,11 @@ PrefabInstance:
     - target: {fileID: 8827787340826874600, guid: 16f4044163d769f4c9f08a82428eac01, type: 3}
       propertyPath: m_NavMeshData
       value: 
+<<<<<<< HEAD
       objectReference: {fileID: 23800000, guid: dd0cad092f1de884aa05ff4b0c5868a0, type: 2}
+=======
+      objectReference: {fileID: 23800000, guid: bf2247a2bf538ca4f8e4fc1975256372, type: 2}
+>>>>>>> parent of 12f7da8 (added new feature)
     - target: {fileID: 8827787340826874600, guid: 16f4044163d769f4c9f08a82428eac01, type: 3}
       propertyPath: m_UseGeometry
       value: 0
