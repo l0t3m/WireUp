@@ -24,6 +24,11 @@ public class LevelHandler : MonoBehaviour
         return currentLevel;
     }
 
+    public int GetLevelsLength()
+    {
+        return levels.Length; 
+    }
+
     public void StartGame()
     {
         currentLevel = levels[0];

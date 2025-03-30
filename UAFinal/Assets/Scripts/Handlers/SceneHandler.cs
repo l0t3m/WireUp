@@ -1,9 +1,12 @@
+
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class SceneHandler : MonoBehaviour
 {
+    public event Action OnSceneLeft;
     public SaveHandler saveHandler;
     void Start()
     {
@@ -12,6 +15,7 @@ public class SceneHandler : MonoBehaviour
 
     public void LoadMainMenu()
     {
+        OnSceneLeft?.Invoke();
         SceneManager.LoadScene(0);
     }
 

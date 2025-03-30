@@ -36,6 +36,8 @@ public class GameHandler : MonoBehaviour
     private Vector3 previousPosition;
     private GameObject previousNavMeshOwner;
 
+    private bool isGameWon = false;
+
 
     private void Start()
     {
@@ -60,6 +62,8 @@ public class GameHandler : MonoBehaviour
             gameUIHandler.UpdateBlocksLeftText(section, levelData.GetItemLimit(section));
         }
         previousPosition = powerObject.transform.position;
+
+        sceneHandler.OnSceneLeft += SaveOnSceneLeft;
     }
 
     private void Update()
@@ -94,6 +98,12 @@ public class GameHandler : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void SaveOnSceneLeft()
+    {
+        if (!isGameWon)
+            saveHandler.SaveHighestLevel(LevelHandler.Instance.GetLevel().LevelNumber-1);
     }
 
     // build the map from the levelData.LevelsMap
@@ -186,17 +196,6 @@ public class GameHandler : MonoBehaviour
 
     public void BeginAgentMovement()
     {
-        StartCoroutine(FinishSurfaceBuild());
-
-        OnGameStarted?.Invoke();
-        isStarted = true;
-        powerObject.isStopped = false;
-        powerObject.updateRotation = false;
-    }
-
-    IEnumerator FinishSurfaceBuild()
-    {
-        yield return new WaitForSeconds(0.2f);
         nms.BuildNavMesh();
         foreach (var relation in relations)
         {
@@ -205,7 +204,12 @@ public class GameHandler : MonoBehaviour
         }
         CalculatePath();
 
+        OnGameStarted?.Invoke();
+        isStarted = true;
+        powerObject.isStopped = false;
+        powerObject.updateRotation = false;
     }
+
 
     private void CalculatePath()
     {
@@ -237,6 +241,8 @@ public class GameHandler : MonoBehaviour
         powerObject.isStopped = true;
         gameUIHandler.ToggleWinPanel();
         audioManager.PlaySound(AudioNames.Win);
+        saveHandler.SaveHighestLevel(LevelHandler.Instance.GetLevel().LevelNumber);
+        isGameWon = true;
     }
 
     private void Lose()
@@ -249,8 +255,9 @@ public class GameHandler : MonoBehaviour
 
     public void NextButtonPressed()
     {
-        bool isComplete = LevelHandler.Instance.LevelComplete();
-        saveHandler.SaveHighestLevel(isComplete ? 0 : LevelHandler.Instance.GetLevel().LevelNumber);
+        LevelHandler.Instance.LevelComplete();
+        bool isComplete = LevelHandler.Instance.GetLevel().LevelNumber == LevelHandler.Instance.GetLevelsLength()+1;
+        saveHandler.SaveHighestLevel(isComplete ? 1 : LevelHandler.Instance.GetLevel().LevelNumber);
         sceneHandler.LoadNextScene(isComplete);
     }
 
