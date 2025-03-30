@@ -14,6 +14,15 @@ public class TutorialHandler : MonoBehaviour
 
     private void Start()
     {
+        if (PlayerPrefs.GetInt("TutorialValue", 1) == 1)
+        {
+            gameObject.SetActive(true);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
+
         if (LevelHandler.Instance.GetLevel().LevelNumber == 1)
             TutorialParts[currentPart].SetActive(true);
         else
