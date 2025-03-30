@@ -5,6 +5,7 @@ public class LevelHandler : MonoBehaviour
     public static LevelHandler Instance;
     [SerializeField] LevelScriptableObject[] levels;
     private LevelScriptableObject currentLevel;
+ 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
@@ -28,12 +29,19 @@ public class LevelHandler : MonoBehaviour
         currentLevel = levels[0];
     }
 
+    public void LoadLevel(int level)
+    {
+        currentLevel = levels[level];
+    }
+
     public bool LevelComplete()
     {
         int levelNumber = currentLevel.LevelNumber;
+        levelNumber++;
         if (!IsLastLevel())
             currentLevel = levels[currentLevel.LevelNumber];
-        levelNumber++;
+
+            
         return levelNumber == levels.Length+1;
     }
 

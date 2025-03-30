@@ -21,6 +21,7 @@ public class GameHandler : MonoBehaviour
     [SerializeField] SceneHandler sceneHandler;
     [SerializeField] AudioManager audioManager;
     [SerializeField] NavMeshSurface nms;
+    [SerializeField] SaveHandler saveHandler;
     LevelScriptableObject levelData;
     private NavMeshAgent powerObject;
     private Transform endObject;
@@ -248,7 +249,9 @@ public class GameHandler : MonoBehaviour
 
     public void NextButtonPressed()
     {
-        sceneHandler.LoadNextScene(LevelHandler.Instance.LevelComplete());
+        bool isComplete = LevelHandler.Instance.LevelComplete();
+        saveHandler.SaveHighestLevel(isComplete ? 0 : LevelHandler.Instance.GetLevel().LevelNumber);
+        sceneHandler.LoadNextScene(isComplete);
     }
 
     private void PlayRotateSound()

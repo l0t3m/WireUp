@@ -4,6 +4,7 @@ using UnityEngine.UIElements;
 
 public class SceneHandler : MonoBehaviour
 {
+    public SaveHandler saveHandler;
     void Start()
     {
         Time.timeScale = 1f;
@@ -16,7 +17,7 @@ public class SceneHandler : MonoBehaviour
 
     public void LoadGameScene()
     {
-        LevelHandler.Instance.StartGame();
+        LevelHandler.Instance.LoadLevel(saveHandler.LoadHighestLevel());
         SceneManager.LoadScene(2);
     }
 
