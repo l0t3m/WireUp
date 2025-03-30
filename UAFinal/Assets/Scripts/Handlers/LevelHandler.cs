@@ -32,13 +32,23 @@ public class LevelHandler : MonoBehaviour
     {
         int levelNumber = currentLevel.LevelNumber;
         if (!IsLastLevel())
+        {
             currentLevel = levels[currentLevel.LevelNumber];
-
-        return currentLevel.LevelNumber;
+            return currentLevel.LevelNumber;
+        }
+        else
+            return currentLevel.LevelNumber + 1;
     }
 
-    public bool IsLastLevel()
+    private bool IsLastLevel()
     {
         return currentLevel.LevelNumber == levels.Length;
     }
+
+    // check if scene handler should return to menu
+    public bool ShouldReturnToMenu()
+    {
+        return currentLevel.LevelNumber == levels.Length + 1;
+    }
+
 }

@@ -959,6 +959,7 @@ MonoBehaviour:
   powerPrefab: {fileID: 2197758990708874103, guid: e6ceb5486b2b2b645a943b07816f4f85, type: 3}
   sceneHandler: {fileID: 420185201}
   audioManager: {fileID: 760031933}
+  idleTimeBase: 1.5
 --- !u!1 &748487850
 GameObject:
   m_ObjectHideFlags: 0
