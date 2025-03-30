@@ -959,6 +959,7 @@ MonoBehaviour:
   powerPrefab: {fileID: 2197758990708874103, guid: e6ceb5486b2b2b645a943b07816f4f85, type: 3}
   sceneHandler: {fileID: 420185201}
   audioManager: {fileID: 760031933}
+  nms: {fileID: 812405649}
   idleTimeBase: 1.5
 --- !u!1 &748487850
 GameObject:
@@ -1318,7 +1319,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.033333335
+  m_VoxelSize: 0.016666668
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 8b6f4e39c29fd0d4fb48fcf458ff4ad4, type: 2}
   m_BuildHeightMesh: 0

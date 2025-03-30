@@ -19,6 +19,7 @@ public class GameHandler : MonoBehaviour
     [SerializeField] UnityEngine.Object powerPrefab;
     [SerializeField] SceneHandler sceneHandler;
     [SerializeField] AudioManager audioManager;
+    [SerializeField] NavMeshSurface nms;
     LevelScriptableObject levelData;
     private NavMeshAgent powerObject;
     private Transform endObject;
@@ -46,7 +47,7 @@ public class GameHandler : MonoBehaviour
         relations = new List<SnapCorrelation>();
         
         BuildMap();
-
+        
         // spawn default blocks
         for (int i = 0; i < levelData.GetLimitsLength(); i++)
         {
@@ -113,7 +114,7 @@ public class GameHandler : MonoBehaviour
                     // if its the end section, set the power objects goal
                     else if (currentSection == BlockSection.FinishSection)
                     {
-                        newPos.y += 2.5f;
+                        newPos.y += 2f;
                         powerObject.SetDestination(newPos);
                         endObject = dragndrop.transform;
                     }
@@ -178,6 +179,14 @@ public class GameHandler : MonoBehaviour
         OnGameStarted?.Invoke();
         isStarted = true;
         powerObject.isStopped = false;
+        powerObject.updateRotation = false;
+        nms.BuildNavMesh();
+        foreach (var relation in relations)
+        {
+            foreach (var link in relation.block.GetComponentsInChildren<NavMeshLink>())
+                link.UpdateLink();
+        }
+        
         DetectDeadEnds();
     }
 
