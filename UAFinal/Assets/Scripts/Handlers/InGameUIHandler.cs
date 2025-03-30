@@ -10,10 +10,12 @@ public class InGameUIHandler : MonoBehaviour
     [SerializeField] GameObject LosePanel;
     [SerializeField] public Timer timer;
     [SerializeField] public TextMeshProUGUI TitleText;
+    [SerializeField] public TextMeshProUGUI PauseCurrentLevelText;
     [SerializeField] public TextMeshProUGUI[] BlocksLeftText = new TextMeshProUGUI[4];
 
     private void Start()
     {
+        PauseCurrentLevelText.text = $"Level {TitleText}";
         timer.onTimerEnd += ToggleLosePanel;
     }
 

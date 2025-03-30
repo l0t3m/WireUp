@@ -44,6 +44,7 @@ public class GameHandler : MonoBehaviour
         levelData = LevelHandler.Instance.GetLevel();
 
         // UI Related:
+        gameUIHandler.PauseCurrentLevelText.text = $"Level {levelData.LevelNumber.ToString()}";
         gameUIHandler.TitleText.text = levelData.LevelNumber.ToString();
         gameUIHandler.timer.StartValue = levelData.TimerLength;
         gameUIHandler.timer.onTimerEnd += Lose;
