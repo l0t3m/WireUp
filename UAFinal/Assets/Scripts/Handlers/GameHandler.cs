@@ -3,8 +3,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
+using Unity.Jobs;
 using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 using static LevelScriptableObject;
@@ -21,6 +21,7 @@ public class GameHandler : MonoBehaviour
     [SerializeField] SceneHandler sceneHandler;
     [SerializeField] AudioManager audioManager;
     [SerializeField] NavMeshSurface nms;
+    [SerializeField] SaveHandler saveHandler;
     LevelScriptableObject levelData;
     private NavMeshAgent powerObject;
     private Transform endObject;
@@ -34,6 +35,8 @@ public class GameHandler : MonoBehaviour
     [SerializeField] float idleTimeBase = 5;
     private Vector3 previousPosition;
     private GameObject previousNavMeshOwner;
+
+    private bool isGameWon = false;
 
 
     private void Start()
@@ -59,6 +62,8 @@ public class GameHandler : MonoBehaviour
             gameUIHandler.UpdateBlocksLeftText(section, levelData.GetItemLimit(section));
         }
         previousPosition = powerObject.transform.position;
+
+        sceneHandler.OnSceneLeft += SaveOnSceneLeft;
     }
 
     private void Update()
@@ -93,6 +98,12 @@ public class GameHandler : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void SaveOnSceneLeft()
+    {
+        if (!isGameWon)
+            saveHandler.SaveHighestLevel(LevelHandler.Instance.GetLevel().LevelNumber-1);
     }
 
     // build the map from the levelData.LevelsMap
@@ -185,24 +196,24 @@ public class GameHandler : MonoBehaviour
 
     public void BeginAgentMovement()
     {
-        OnGameStarted?.Invoke();
-        isStarted = true;
-        powerObject.isStopped = false;
-        powerObject.updateRotation = false;
         nms.BuildNavMesh();
         foreach (var relation in relations)
         {
             foreach (var link in relation.block.GetComponentsInChildren<NavMeshLink>())
                 link.UpdateLink();
         }
-        
-        DetectDeadEnds();
+        CalculatePath();
+
+        OnGameStarted?.Invoke();
+        isStarted = true;
+        powerObject.isStopped = false;
+        powerObject.updateRotation = false;
     }
 
-    private void DetectDeadEnds()
+
+    private void CalculatePath()
     {
         NavMeshPath path = new NavMeshPath();
-        Vector3 goalPos = endObject.position;
 
         foreach (Snap snap in FindObjectsByType<Snap>(FindObjectsSortMode.None))
         {
@@ -211,12 +222,12 @@ public class GameHandler : MonoBehaviour
             Vector3 start = relation.block.transform.position;
             if (NavMesh.SamplePosition(start, out NavMeshHit hit, 1f, NavMesh.AllAreas))
             {
-                NavMesh.CalculatePath(hit.position, goalPos, NavMesh.AllAreas, path);
+                NavMesh.CalculatePath(hit.position, endObject.transform.position, NavMesh.AllAreas, path);
 
                 if (path.status != NavMeshPathStatus.PathComplete)
                 {
                     // Dead end found - handle it
-                    Debug.Log($"Dead end at {relation.block.name}");                
+                    Debug.Log($"Dead end at {relation.block.name}");
                 }
                 else
                     powerObject.path = path;
@@ -230,6 +241,8 @@ public class GameHandler : MonoBehaviour
         powerObject.isStopped = true;
         gameUIHandler.ToggleWinPanel();
         audioManager.PlaySound(AudioNames.Win);
+        saveHandler.SaveHighestLevel(LevelHandler.Instance.GetLevel().LevelNumber);
+        isGameWon = true;
     }
 
     private void Lose()
@@ -242,7 +255,10 @@ public class GameHandler : MonoBehaviour
 
     public void NextButtonPressed()
     {
-        sceneHandler.LoadNextScene(LevelHandler.Instance.LevelComplete());
+        LevelHandler.Instance.LevelComplete();
+        bool isComplete = LevelHandler.Instance.GetLevel().LevelNumber == LevelHandler.Instance.GetLevelsLength()+1;
+        saveHandler.SaveHighestLevel(isComplete ? 1 : LevelHandler.Instance.GetLevel().LevelNumber);
+        sceneHandler.LoadNextScene(isComplete);
     }
 
     private void PlayRotateSound()

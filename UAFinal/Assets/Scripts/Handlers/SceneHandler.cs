@@ -1,9 +1,13 @@
+
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class SceneHandler : MonoBehaviour
 {
+    public event Action OnSceneLeft;
+    public SaveHandler saveHandler;
     void Start()
     {
         Time.timeScale = 1f;
@@ -11,12 +15,13 @@ public class SceneHandler : MonoBehaviour
 
     public void LoadMainMenu()
     {
+        OnSceneLeft?.Invoke();
         SceneManager.LoadScene(0);
     }
 
     public void LoadGameScene()
     {
-        LevelHandler.Instance.StartGame();
+        LevelHandler.Instance.LoadLevel(saveHandler.LoadHighestLevel());
         SceneManager.LoadScene(2);
     }
 

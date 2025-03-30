@@ -496,6 +496,7 @@ GameObject:
   m_Component:
   - component: {fileID: 420185200}
   - component: {fileID: 420185201}
+  - component: {fileID: 420185202}
   m_Layer: 0
   m_Name: SceneHandler
   m_TagString: Untagged
@@ -528,6 +529,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d84c7a10d4612f4c867116f60e9a1ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveHandler: {fileID: 420185202}
+--- !u!114 &420185202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 420185199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 544338b7172e1954f999ad752d96b980, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &458575848
@@ -1083,6 +1097,7 @@ MonoBehaviour:
   sceneHandler: {fileID: 420185201}
   audioManager: {fileID: 760031933}
   nms: {fileID: 812405649}
+  saveHandler: {fileID: 420185202}
   idleTimeBase: 1.5
 --- !u!1 &748487850
 GameObject:
