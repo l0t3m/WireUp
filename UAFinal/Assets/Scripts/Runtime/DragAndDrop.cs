@@ -22,11 +22,20 @@ public class DragAndDrop : MonoBehaviour
     [SerializeField] bool canRotate = true;
     private bool isRotated = false;
     [HideInInspector] public bool IsGenerated = false;
+    [SerializeField] Material poweredMaterial;
 
 
     private void Start()
     {
         OriginalPosition = transform.position;
+    }
+
+    public void ChangeColor()
+    {
+        foreach (var child in GetComponentsInChildren<MeshRenderer>())
+        {
+            child.material = poweredMaterial;
+        }
     }
 
     private void OnMouseDown()
@@ -82,7 +91,11 @@ public class DragAndDrop : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ground" || (collision.gameObject.tag == "BlockPiece") && !isSnapped)
             ResetPosition();
+
+       
     }
+
+
 
     // Methods:
     private Vector3 GetMouseWorldPosition()
