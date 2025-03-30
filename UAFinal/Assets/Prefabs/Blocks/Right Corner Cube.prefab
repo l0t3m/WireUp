@@ -118,6 +118,10 @@ PrefabInstance:
       propertyPath: blockSection
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 3000318598770157454, guid: 16f4044163d769f4c9f08a82428eac01, type: 3}
+      propertyPath: poweredMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 736e8c6a8671fc24e8a70dff46b64402, type: 2}
     - target: {fileID: 3090984335615154518, guid: 16f4044163d769f4c9f08a82428eac01, type: 3}
       propertyPath: m_Drag
       value: 0
@@ -260,7 +264,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8827787340826874600, guid: 16f4044163d769f4c9f08a82428eac01, type: 3}
       propertyPath: m_VoxelSize
-      value: 0.033333335
+      value: 0.083333336
       objectReference: {fileID: 0}
     - target: {fileID: 8827787340826874600, guid: 16f4044163d769f4c9f08a82428eac01, type: 3}
       propertyPath: m_NavMeshData

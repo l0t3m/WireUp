@@ -13,7 +13,7 @@ public class Snap : MonoBehaviour
     {
         if (CanSnapOntoMe(collision.gameObject.tag))
             OnSnap?.Invoke(this, collision.gameObject.GetComponent<DragAndDrop>());   
-    }  
+    }
 
     public void DoSnap(GameObject obj)
     {
