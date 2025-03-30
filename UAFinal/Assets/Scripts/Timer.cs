@@ -20,9 +20,12 @@ public class Timer : MonoBehaviour
         if (timer == -1)
         {
             this.GetComponent<TextMeshProUGUI>().text = "--.--".Replace('.',':');
+            ChangeTextColor(Color.gray);
         }
         else if (timer > 0f)
         {
+            if (timer <= 5f)
+                ChangeTextColor(Color.red);
             this.GetComponent<TextMeshProUGUI>().text = timer.ToString("00.00").Replace('.', ':');
             timer -= Time.deltaTime;
         }
@@ -34,5 +37,10 @@ public class Timer : MonoBehaviour
                 isFinished = true;
             }
         }
+    }
+
+    private void ChangeTextColor(Color color)
+    {
+        gameObject.GetComponent<TextMeshProUGUI>().color = color;
     }
 }
