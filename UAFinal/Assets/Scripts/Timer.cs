@@ -19,14 +19,14 @@ public class Timer : MonoBehaviour
     {
         if (timer == -1)
         {
-            this.GetComponent<TextMeshProUGUI>().text = "--.--".Replace('.',':');
+            this.GetComponent<TextMeshProUGUI>().text = FormatTimerText(timer);
             ChangeTextColor(Color.gray);
         }
         else if (timer > 0f)
         {
             if (timer <= 5f)
                 ChangeTextColor(Color.red);
-            this.GetComponent<TextMeshProUGUI>().text = timer.ToString("00.00").Replace('.', ':');
+            this.GetComponent<TextMeshProUGUI>().text = FormatTimerText(timer);
             timer -= Time.deltaTime;
         }
         else
@@ -42,5 +42,19 @@ public class Timer : MonoBehaviour
     private void ChangeTextColor(Color color)
     {
         gameObject.GetComponent<TextMeshProUGUI>().color = color;
+    }
+
+    private string FormatTimerText(float value)
+    {
+        if (value == -1f)
+            return "--:--";
+
+        int minutes = Mathf.FloorToInt(value / 60f);
+        int seconds = Mathf.FloorToInt(value % 60f);
+        int hundredths = Mathf.FloorToInt((value * 100f) % 100f);
+
+        if (minutes == 0)
+            return string.Format("{0:00}:{1:00}", seconds, hundredths);
+        return string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, hundredths);
     }
 }
