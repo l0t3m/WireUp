@@ -15,8 +15,8 @@ MonoBehaviour:
   GridBlock: {fileID: 8029643607327703985, guid: f352201fb0ef9ae43aa666aab4c43164, type: 3}
   Obstacle: {fileID: 5888910616184316881, guid: 81e0ad4b648cc9444897d767e7f9b5ab, type: 3}
   StraightSection: {fileID: 7268605627017552596, guid: 16f4044163d769f4c9f08a82428eac01, type: 3}
+  LeftCornerSection: {fileID: 5194031395709912447, guid: 512c594598de46547b4c122d585ad7c4, type: 3}
   TSection: {fileID: 939668172930874390, guid: 4d0ad213f393acb46a52450ba1835212, type: 3}
   RightCornerSection: {fileID: 65174697525788616, guid: 23a088a6468f8ed4c89ba5d6992c91a2, type: 3}
-  LeftCornerSection: {fileID: 5194031395709912447, guid: 512c594598de46547b4c122d585ad7c4, type: 3}
   StartSection: {fileID: 2414545903294726928, guid: 8e2d884c28bf1b5478706846b4279854, type: 3}
-  FinishSection: {fileID: 2414545903294726928, guid: 8e2d884c28bf1b5478706846b4279854, type: 3}
+  FinishSection: {fileID: 7852233418040398984, guid: 2bf09359fe16e4842b6b3ab6c6155919, type: 3}
