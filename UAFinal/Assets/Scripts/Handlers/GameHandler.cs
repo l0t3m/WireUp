@@ -91,11 +91,11 @@ public class GameHandler : MonoBehaviour
             if (powerObject.isOnNavMesh)
             {
                 GameObject currentOwner = powerObject.navMeshOwner.GameObject();
-                if (previousNavMeshOwner == currentOwner)
+                if (previousNavMeshOwner != currentOwner || previousNavMeshOwner == null)
                 {
+                    if (currentOwner.name != "Links")
+                        currentOwner.GetComponent<DragAndDrop>().ChangeColor();
                     previousNavMeshOwner = currentOwner;
-                    //currentOwner.GetComponent<DragAndDrop>().ChangeColor();
-
                 }
             }
         }
@@ -152,7 +152,6 @@ public class GameHandler : MonoBehaviour
     private void HandleSnap(Snap grid, DragAndDrop block)
     {
         // if relation exists, dip
-        Debug.Log(relations.Find(relation => relation.IsPartOfCorrelation(grid, block)) != null);
         if (relations.Find(relation => relation.IsPartOfCorrelation(grid, block)) != null) return;
         SnapCorrelation currentSnap = new SnapCorrelation(grid, block);
         relations.Add(currentSnap);
@@ -225,13 +224,8 @@ public class GameHandler : MonoBehaviour
             {
                 NavMesh.CalculatePath(hit.position, endObject.transform.position, NavMesh.AllAreas, path);
 
-                if (path.status != NavMeshPathStatus.PathComplete)
-                {
-                    // Dead end found - handle it
-                    Debug.Log($"Dead end at {relation.block.name}");
-                }
-                else
-                    powerObject.path = path;
+                if (!(path.status != NavMeshPathStatus.PathComplete))
+                    powerObject.path = path;     
             }
         }
     }
