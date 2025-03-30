@@ -30,10 +30,9 @@ public class SceneHandler : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void LoadNextScene()
+    public void LoadNextScene(int levelNum)
     {
-        Debug.Log(LevelHandler.Instance.IsLastLevel());
-        if (LevelHandler.Instance.IsLastLevel())
+        if (LevelHandler.Instance.ShouldReturnToMenu())
             LoadMainMenu();
         else
             ReloadScene();

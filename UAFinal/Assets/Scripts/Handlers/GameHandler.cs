@@ -28,9 +28,8 @@ public class GameHandler : MonoBehaviour
 
     private bool isFinished = false;
     private bool isStarted = false;
-    private bool attemptedRepath = false;
     private float idleTime = 5;
-    [SerializeField] private const float idleTimeBase = 5;
+    [SerializeField] float idleTimeBase = 5;
     private Vector3 previousPosition;
 
 
@@ -61,48 +60,37 @@ public class GameHandler : MonoBehaviour
 
     private void Update()
     {
+        // check if power object is not null, if it isn't, check if it reached it's destination
         if (powerObject != null)
         {           
             if (Vector3.Distance(powerObject.transform.position, endObject.position) < 1.5f && !isFinished)
                 Win();
+            // if the power object is stationary for more than idleTimeBase, if so, lose the game
             else if (!isFinished && isStarted)
             {
                 if (Equals(previousPosition, powerObject.transform.position))
                 {
                     idleTime -= Time.deltaTime;
-                    if (idleTime < 3f && !attemptedRepath)
-                    {
-                        
-                        NavMeshHit hit;
-
-                        if (powerObject.SamplePathPosition(1, 1000, out hit))
-                        {
-                            hit.mask = 2;
-                        }
-                        powerObject.ResetPath();
-                        powerObject.SetDestination(endObject.position);
-                        attemptedRepath = true;
-                    }
-                    else if (idleTime <= 0f)
+                   if (idleTime <= 0f)
                         Lose();
                 }
                 else
-                {
                     idleTime = idleTimeBase;
-                    attemptedRepath = false;
-                }
             }
             previousPosition = powerObject.transform.position;
         }
     }
 
+    // build the map from the levelData.LevelsMap
     private void BuildMap()
     {
         rowData[] mapPrimitive = levelData.LevelsMap;
+        //loops through the 2d array
         for (int i = 0; i < mapPrimitive.Length; i++)
         {
             for (int j = 0; j < mapPrimitive[0].types.Length; j++)
             {
+                // takes the block type that should be on the grid
                 BlockSection currentSection = mapPrimitive[i].types[j];
                 Vector3 newPos = new Vector3(levelData.TopLeftCorner.x + j * levelData.BlockDistance, levelData.TopLeftCorner.y, levelData.TopLeftCorner.z - i * levelData.BlockDistance);
                 Snap currentGrid = Instantiate(blockData.GetGridObject(), newPos, new Quaternion()).GameObject().GetComponent<Snap>();
@@ -110,16 +98,19 @@ public class GameHandler : MonoBehaviour
                 if (currentSection != BlockSection.Empty)
                 {
                     newPos.y += 0.75f;
+                    // creates the block type on the grid
                     DragAndDrop dragndrop = Instantiate(blockData.GetBlockByType(currentSection), newPos, new Quaternion()).GameObject().GetComponent<DragAndDrop>();
                     dragndrop.IsGenerated = true;
                     ExecuteNewPlaceableBlock(dragndrop);
                     newPos.y += 0.5f;
+                    // if it's the start section, create the power object
                     if (currentSection == BlockSection.StartSection)
                     {
                         powerObject = Instantiate(powerPrefab, newPos, new Quaternion()).GameObject().GetComponent<NavMeshAgent>();
                         powerObject.isStopped = true;
                         powerObject.obstacleAvoidanceType = ObstacleAvoidanceType.MedQualityObstacleAvoidance;
                     }
+                    // if its the end section, set the power objects goal
                     else if (currentSection == BlockSection.FinishSection)
                     {
                         newPos.y += 2.5f;
@@ -131,13 +122,17 @@ public class GameHandler : MonoBehaviour
         }
     }
 
+    // handle snap logic between grid and blocks
     private void HandleSnap(Snap grid, DragAndDrop block)
     {
+        // if relation exists, dip
         if (relations.Find(relation => relation.IsPartOfCorrelation(grid, block)) != null) return;
         SnapCorrelation currentSnap = new SnapCorrelation(grid, block);
         relations.Add(currentSnap);
 
+        // spawn the block's type on the right platform
         SpawnNewBlock(block);
+        // updates all links in all relations because this game doesn't want to work without this
         foreach (var relation in relations)
         {
             foreach (var link in relation.block.GetComponentsInChildren<NavMeshLink>())
@@ -229,8 +224,7 @@ public class GameHandler : MonoBehaviour
 
     public void NextButtonPressed()
     {
-        LevelHandler.Instance.LevelComplete();
-        sceneHandler.LoadNextScene();
+        sceneHandler.LoadNextScene(LevelHandler.Instance.LevelComplete());
     }
 
     private void PlayRotateSound()
