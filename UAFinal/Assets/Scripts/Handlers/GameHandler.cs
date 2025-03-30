@@ -3,8 +3,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
+using Unity.Jobs;
 using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 using static LevelScriptableObject;
@@ -185,24 +185,30 @@ public class GameHandler : MonoBehaviour
 
     public void BeginAgentMovement()
     {
+        StartCoroutine(FinishSurfaceBuild());
+
         OnGameStarted?.Invoke();
         isStarted = true;
         powerObject.isStopped = false;
         powerObject.updateRotation = false;
+    }
+
+    IEnumerator FinishSurfaceBuild()
+    {
+        yield return new WaitForSeconds(0.2f);
         nms.BuildNavMesh();
         foreach (var relation in relations)
         {
             foreach (var link in relation.block.GetComponentsInChildren<NavMeshLink>())
                 link.UpdateLink();
         }
-        
-        DetectDeadEnds();
+        CalculatePath();
+
     }
 
-    private void DetectDeadEnds()
+    private void CalculatePath()
     {
         NavMeshPath path = new NavMeshPath();
-        Vector3 goalPos = endObject.position;
 
         foreach (Snap snap in FindObjectsByType<Snap>(FindObjectsSortMode.None))
         {
@@ -211,12 +217,12 @@ public class GameHandler : MonoBehaviour
             Vector3 start = relation.block.transform.position;
             if (NavMesh.SamplePosition(start, out NavMeshHit hit, 1f, NavMesh.AllAreas))
             {
-                NavMesh.CalculatePath(hit.position, goalPos, NavMesh.AllAreas, path);
+                NavMesh.CalculatePath(hit.position, endObject.transform.position, NavMesh.AllAreas, path);
 
                 if (path.status != NavMeshPathStatus.PathComplete)
                 {
                     // Dead end found - handle it
-                    Debug.Log($"Dead end at {relation.block.name}");                
+                    Debug.Log($"Dead end at {relation.block.name}");
                 }
                 else
                     powerObject.path = path;
