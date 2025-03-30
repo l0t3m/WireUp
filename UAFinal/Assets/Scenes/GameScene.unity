@@ -1099,7 +1099,6 @@ MonoBehaviour:
   audioManager: {fileID: 760031933}
   nms: {fileID: 812405649}
   saveHandler: {fileID: 420185202}
-  poweredMaterial: {fileID: 2100000, guid: 736e8c6a8671fc24e8a70dff46b64402, type: 2}
   idleTimeBase: 0.5
 --- !u!1 &748487850
 GameObject:
@@ -1461,7 +1460,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.033333335
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 1665e560c673cf8429ee9c62d4abe994, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: a1887ec341429f0438fd01a8619d23fe, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &832575517
 GameObject:
